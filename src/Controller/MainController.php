@@ -9,7 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
+<<<<<<< HEAD
      * @Route("/", name="app_main")
+=======
+     * @Route("/base", name="home")
+>>>>>>> f859b06 (test)
      */
     public function index(): Response
     {
