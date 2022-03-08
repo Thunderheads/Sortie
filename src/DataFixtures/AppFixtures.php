@@ -36,8 +36,8 @@ class AppFixtures extends Fixture
         $this->addEtat();
         $this->addVille();
         $this->addLieu();
-        $this->addParticipant();
         $this->addCampus();
+        $this->addParticipant();
         $this->addSortie();
     }
 
