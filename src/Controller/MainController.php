@@ -9,16 +9,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-<<<<<<< HEAD
-     * @Route("/", name="app_main")
-=======
-     * @Route("/base", name="home")
->>>>>>> f859b06 (test)
+     * @Route("/", name="base")
      */
-    public function index(): Response
+    public function base(): Response
     {
         return $this->render('base.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }
+
+    /**
+     * @Route("/home", name="home")
+     */
+    public function home(): Response
+    {
+        return $this->render('sortie/home.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
+
 }
