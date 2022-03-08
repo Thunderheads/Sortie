@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function index(): Response
         {
-            return $this->render('trip/index.html.twig', [
+            return $this->render('sortie/index.html.twig', [
                 'controller_name' => 'SortieController',
             ]);
         }
@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function creerUneSortie(): Response
         {
-            return $this->render('trip/creerUneSortie.html.twig', [
+            return $this->render('sortie/creerUneSortie.html.twig', [
                 'controller_name' => 'SortieController',
             ]);
         }
@@ -35,7 +35,7 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function afficherUneSortie(): Response
         {
-            return $this->render('trip/afficherUneSortie.html.twig', [
+            return $this->render('sortie/afficherUneSortie.html.twig', [
                 'controller_name' => 'SortieController',
             ]);
         }
@@ -45,7 +45,7 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function modifierUneSortie(): Response
         {
-            return $this->render('trip/modifierUneSortie.html.twig', [
+            return $this->render('sortie/modifierUneSortie.html.twig', [
                 'controller_name' => 'SortieController',
             ]);
         }
@@ -55,7 +55,7 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function annulerLaSortie(): Response
         {
-            return $this->render('trip/annulerLaSortie.html.twig', [
+            return $this->render('sortie/annulerLaSortie.html.twig', [
                 'controller_name' => 'SortieController',
             ]);
         }
