@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SortieController!{% endblock %}
+
+{% block body %}
+    <div class="titre">
+        <h2>Afficher une sortie</h2>
+    </div>
+
+    <div class="container">
+        <div>
+            <label for="nomSortie">Nom de la sortie :</label>
+            <label for="campus">Campus :</label>
+        </div>
+        <div>
+            <label for="dateHeureSortie">Date et heure de la sortie :</label>
+            <label for="lieu">Lieu :</label>
+        </div>
+        <div>
+            <label for="dateLimiteInscription">Date limite inscription :</label>
+            <label for="rue">Rue :</label>
+        </div>
+        <div>
+            <label for="nombrePlaces">Nombre de places :</label>
+            <label for="codePostal">Code postal :</label>
+        </div>
+        <div>
+            <label for="durée">Durée :</label>
+            <label for="latitude">Latitude :</label>
+        </div>
+        <div>
+            <label for="descriptionInfos">Description et infos :</label>
+            <label for="longitude">Longitude :</label>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-1">Pseudo</th>
+                            <th scope="col" class="col-3">Nom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+<!--Boucler-->
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
