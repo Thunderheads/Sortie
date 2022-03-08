@@ -88,7 +88,7 @@ class Campus
     }
 
     /**
-     * @return Collection<int, Participant>
+     * @return Collection<int, Participant2>
      */
     public function getParticipant(): Collection
     {
