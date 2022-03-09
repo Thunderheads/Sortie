@@ -17,9 +17,9 @@
     <title>Document</title>
 </head>
 <body>
-<h3>Filtrer les sorties</h3>
-
-<div class="ben mx-2">
+<h3 class="mx-4">Filtrer les sorties</h3>
+<br>
+<div class="ben mx-4">
     <p>Campus</p>
     <select class="mx-2" aria-label="Default select example">
 
@@ -28,12 +28,12 @@
     </select>
 </div>
 <br>
-<div class="ben mx-2">
+<div class="ben mx-4">
         <p>Le nom de la sortie contient</p>
         <input class="mx-2" type="text" name="search" placeholder="search">
 </div>
 <br>
-<div class="ben">
+<div class="ben mx-4">
         <form class="ben my-sm-5">
             <label for="date" >Entre</label>
                 <div class="input-group date " id="datepicker">
@@ -89,9 +89,8 @@
 </div>
 
 
-<div class="container mx-2">
-    <div class="" >
-
+    <div class="container mx-3">
+    <div style="height: 400px; overflow: scroll">
         <table class="table table-secondary">
             <thead>
             <th>Nom de la sortie</th>
@@ -115,15 +114,13 @@
                 <th>{{ c.nom }}</th>
                 <th>{{ c.nom }}</th>
 
-
-
-
             </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-</div>
+    </div>
+    <button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Créer une sortie</button>
 
 
 
