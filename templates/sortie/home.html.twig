@@ -23,9 +23,8 @@
     <p>Campus</p>
     <select class="mx-2" aria-label="Default select example">
 
-        <option value="1">qerfbzt</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="1">toto</option>
+
     </select>
 </div>
 <br>
@@ -105,20 +104,28 @@
             <th>actions</th>
             </thead>
             <tbody>
-            <tr class="table-active">
-            </tr>
+            {% for c in sorties %}
             <tr>
-            </tr>
-            <tr>
-                <th scope="row">{{ path('base') }}</th>
+                <th>{{ c.nom }}</th>
+                <th>{{ c.lieu.ville.nom }}</th>
+                <th>{{ c.campus.nom }}</th>
+                <th>{{ c.nom }}</th>
+                <th>{{ c.nom }}</th>
+                <th>{{ c.nom }}</th>
+                <th>{{ c.nom }}</th>
+                <th>{{ c.nom }}</th>
+
+
+
 
             </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
 
-<button type="button" class="btn btn-secondary btn-lg mx-4" href="{{ path('base')}}">Créer une sortie</button>
+
 
 </body>
 </html>

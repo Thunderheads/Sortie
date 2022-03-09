@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Sortie;
+use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,10 +25,15 @@ class MainController extends AbstractController
     /**
      * @Route("/home", name="home")
      */
-    public function home(): Response
+    public function home(SortieRepository $repo): Response
     {
+        $co = new Sortie();
+        //$form =  $this->createForm(::class, $co);
+        //$form->handleRequest($req);
+
         return $this->render('sortie/home.html.twig', [
-            'controller_name' => 'MainController',
+            'sorties' => $repo->findAll(),
+            //'form' => $form->createView()
         ]);
     }
 
