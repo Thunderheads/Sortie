@@ -1,14 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2 class="">Annuler une sortie</h2>
-    <div class="col-3">
-        <p>Nom de la sortie: </p>
-        <p>Date de la sortie: </p>
-        <p>Campus: </p>
-        <p>Lieu: </p>
-        <p>Motif: </p>
-        <textarea style="width: 300px ; height:100px"></textarea>
-    </div>
 
+    <h2>Annuler une sortie</h2>
+    <div>
+        <label><b>Nom de la sortie: </b></label>
+        <label>{{ sortie.nom }}</label>
+
+    </div>
+    <div>
+        <label><b>Date de la sortie: </b></label>
+        <label>{{ sortie.dateHeureDebut|date('d-m-Y H:i:s') }}</label>
+    </div>
+    <div>
+        <label><b>Campus: </b></label>
+        <label>{{ sortie.campus.nom }}</label>
+    </div>
+    <div>
+        <label><b>Lieu: </b></label>
+        <label>{{ sortie.lieu.nom }}</label>
+    </div>
+<br>
+        <p><b>Motif: </b></p>
+        <textarea style="width: 300px ; height:100px"></textarea>
+
+    <div class="ben">
+        <a href="{{ path('sortiehome') }}" target="_blank"><button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Enregistrer</button></a>
+        <button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Annuler</button>
+    </div>
 {% endblock %}
