@@ -92,10 +92,11 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/cancel/{id}", name="annulerLaSortie")
          */
-        public function annulerLaSortie(): Response
+        public function annulerLaSortie(Sortie $sortie,SortieRepository $repo): Response
         {
             return $this->render('sortie/annulerLaSortie.html.twig', [
-                'controller_name' => 'SortieController',
+                'sortie'=>$sortie,
+
             ]);
         }
     }

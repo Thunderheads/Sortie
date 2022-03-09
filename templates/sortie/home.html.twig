@@ -4,19 +4,19 @@
 <h2 class="mx-4">Filtrer les sorties</h2>
 <br>
 <div class="ben mx-4">
-    <p>Campus</p>
-
+    <label>Campus</label>
+    <label>
         <div class="fo mx-2">
             {{ form_start(form.Campus) }}
             {{ form_widget(form.Campus) }}
             {{ form_end(form.Campus) }}
         </div>
-
+    </label>
     </select>
 </div>
 <br>
 <div class="ben mx-4">
-        <p>Le nom de la sortie contient</p>
+        <label>Le nom de la sortie contient</label>
         <input class="mx-2" type="text" name="search" placeholder="search">
 </div>
 
@@ -25,19 +25,19 @@
         <form class="ben my-sm-5">
             <label for="date" >Entre</label>
                 <div class="input-group date " id="datepicker">
-                    <input type="text" class="form-control" id="date"/>
+                    <input type="datetime-local" id="start" name="trip-start"
+                           value="2018-07-22"
+                           min="2018-01-01" max="2018-12-31">
                     <span class="input-group-append">
-                        <span class="input-group-text bg-light">
-                            <i class="fa fa-calendar"></i>
                         </span>
                     </span>
                 </div>
             <label for="date" >et</label>
                 <div class="input-group date" id="datepicker">
-                    <input type="text" class="form-control" id="date"/>
+                    <input type="datetime-local" id="start" name="trip-start"
+                           value="2018-07-22"
+                           min="2018-01-01" max="2018-12-31">
                     <span class="input-group-append">
-                        <span class="input-group-text bg-light">
-                            <i class="fa fa-calendar"></i>
                         </span>
                     </span>
                 </div>
