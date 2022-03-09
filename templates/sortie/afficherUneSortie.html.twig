@@ -9,28 +9,28 @@
 
     <div class="container">
         <div>
-            <label for="nomSortie">Nom de la sortie :</label>
-            <label for="campus">Campus :</label>
+            <label for="nomSortie">Nom de la sortie :</label> <p>{{ sortie.nom }}</p>
+            <label for="campus">Campus :</label> <p>{{ sortie.campus.nom}}</p>
         </div>
         <div>
-            <label for="dateHeureSortie">Date et heure de la sortie :</label>
-            <label for="lieu">Lieu :</label>
+            <label for="dateHeureSortie">Date et heure de la sortie :</label> <p>{{ sortie.dateHeureDebut|date('d-m-Y H:i:s') }}</p>
+            <label for="lieu">Lieu :</label> <p>{{ sortie.lieu.nom }}</p>
         </div>
         <div>
-            <label for="dateLimiteInscription">Date limite inscription :</label>
-            <label for="rue">Rue :</label>
+            <label for="dateLimiteInscription">Date limite inscription :</label> <p>{{ sortie.dateLimiteInscription|date('d-m-Y H:i:s') }}</p>
+            <label for="rue">Rue :</label> <p>{{ sortie.lieu.rue }}</p>
         </div>
         <div>
-            <label for="nombrePlaces">Nombre de places :</label>
-            <label for="codePostal">Code postal :</label>
+            <label for="nombrePlaces">Nombre de places :</label> <p>{{ sortie.nbInscriptionMax }}</p>
+            <label for="codePostal">Code postal :</label> <p>{{ sortie.lieu.ville.codePostal }}</p>
         </div>
         <div>
-            <label for="durée">Durée :</label>
-            <label for="latitude">Latitude :</label>
+            <label for="durée">Durée :</label>  <p>{{ sortie.duree }}</p>
+            <label for="latitude">Latitude :</label>  <p>{{ sortie.lieu.latitude }}</p>
         </div>
         <div>
-            <label for="descriptionInfos">Description et infos :</label>
-            <label for="longitude">Longitude :</label>
+            <label for="descriptionInfos">Description et infos :</label> <p>{{ sortie.infosSortie }}</p>
+            <label for="longitude">Longitude :</label> <p>{{ sortie.lieu.longitude }}</p>
         </div>
 
         <div class="row">

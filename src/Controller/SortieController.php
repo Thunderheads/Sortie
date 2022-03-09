@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Sortie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function index(): Response
         {
-            return $this->render('sortie/index.html.twig', [
+            //
+            return $this->render('sortie/index.html.twig', [ //route du dossier plus fichier
                 'controller_name' => 'SortieController',
             ]);
         }
@@ -33,10 +35,10 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/show/{id}", name="afficherUneSortie")
          */
-        public function afficherUneSortie(): Response
+        public function afficherUneSortie(Sortie $s): Response
         {
             return $this->render('sortie/afficherUneSortie.html.twig', [
-                'controller_name' => 'SortieController',
+                'sortie' => $s,
             ]);
         }
 
