@@ -2,9 +2,10 @@
 
 {% block title %}Hello SortieController!{% endblock %}
 
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% form_theme sortieForm 'bootstrap_5_layout.html.twig' %}
 
 {% block body %}
+
     {{ form_start(sortieForm) }}
     {{ form_widget(sortieForm) }}
     <button>Enregistrer</button>
