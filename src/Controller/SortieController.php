@@ -2,7 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
+use App\Entity\Lieu;
+use App\Entity\Sortie;
+use App\Form\SortieType;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 /**
@@ -23,10 +29,27 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/new/", name="creerUneSortie")
          */
-        public function creerUneSortie(): Response
+        public function creerUneSortie(Request $req): Response
         {
+
+            //creation d'instance
+            $sortie = new  Sortie();
+            $campus = new Campus();
+            $lieu = new Lieu();
+
+
+
+            $sortieForm = $this->createForm(SortieType::class, $sortie);
+
+
+            $sortieForm->handleRequest($req);
+
+            if($sortieForm-> isSubmitted() && $sortieForm->isValid()){
+                return $this->redirectToRoute('app_main');
+            }
+
             return $this->render('sortie/creerUneSortie.html.twig', [
-                'controller_name' => 'SortieController',
+                "sortieForm" => $sortieForm->createView()
             ]);
         }
 
