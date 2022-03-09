@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\SortieRepository;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,10 +57,12 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/show/{id}", name="afficherUneSortie")
          */
-        public function afficherUneSortie(): Response
+        public function afficherUneSortie(Sortie $sortie,SortieRepository $repo): Response
         {
+            dd($sortie);
             return $this->render('sortie/afficherUneSortie.html.twig', [
-                'controller_name' => 'SortieController',
+                'sortie' => $sortie,
+                'sorties' => $repo->findAll()
             ]);
         }
 
