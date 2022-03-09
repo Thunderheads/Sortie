@@ -3,9 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Campus;
-use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Entity\Lieu;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -15,8 +16,18 @@ class SortieType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('dateHeureDebut')
-            ->add('dateLimiteInscription')
+            ->add('dateHeureDebut', DateType::class, [
+                'label' => 'dateHeureDebut',
+                'html5' => true,
+                'widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('dateLimiteInscription',DateType::class, [
+                'label' => 'dateLimiteInscription ',
+                'html5' => true,
+                'widget' => 'single_text',
+                'required' => false,
+            ])
             ->add('nbInscriptionMax')
             ->add('duree')
             ->add('infosSortie')
@@ -25,6 +36,7 @@ class SortieType extends AbstractType
                 'class' => Campus::class,
                 // uses the User.username property as the visible option string
                 'choice_label' => 'nom',
+                'placeholder' => 'choisir un campus'
 
             ])
             ->add('Lieu', EntityType::class, [

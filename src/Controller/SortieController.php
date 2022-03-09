@@ -50,23 +50,21 @@ use Symfony\Component\Routing\Annotation\Route;
 
             //creation d'instance
             $sortie = new  Sortie();
-            $campus = new Campus();
-            $lieu = new Lieu();
-
-
 
             $sortieForm = $this->createForm(SortieType::class, $sortie);
-
-
             $sortieForm->handleRequest($req);
 
-            if($sortieForm-> isSubmitted() && $sortieForm->isValid()){
-                return $this->redirectToRoute('app_main');
-            }
+            if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
-            return $this->render('sortie/creerUneSortie.html.twig', [
-                "sortieForm" => $sortieForm->createView()
-            ]);
+
+                if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+                    return $this->redirectToRoute('app_main');
+                }
+
+                return $this->render('sortie/creerUneSortie.html.twig', [
+                    "sortieForm" => $sortieForm->createView()
+                ]);
+            }
         }
 
         /**
@@ -87,7 +85,7 @@ use Symfony\Component\Routing\Annotation\Route;
         public function modifierUneSortie(): Response
         {
             return $this->render('sortie/modifierUneSortie.html.twig', [
-                'controller_name' => 'SortieController',
+                'controller_name' => 'SortieController'
             ]);
         }
 

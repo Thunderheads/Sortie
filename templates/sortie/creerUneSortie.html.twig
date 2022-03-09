@@ -2,15 +2,46 @@
 
 {% block title %}Hello SortieController!{% endblock %}
 
-{% form_theme sortieForm 'bootstrap_5_layout.html.twig' %}
+
 
 {% block body %}
+<div class ="container-fluid">
+    <div class="card ">
+        <div class="card-header text-white bg-info">
+            Créer une Sortie
+        </div>
+    </div>
 
-    {{ form_start(sortieForm) }}
-    {{ form_widget(sortieForm) }}
-    <button>Enregistrer</button>
-    <button>Publier la sortie</button>
-    <button>Annuler</button>
-    {{ form_end(sortieForm) }}
+    <div class="card-body">
+        {{ form_start(sortieForm) }}
+
+        <!-- ligne 1-->
+        <div class="form-row col-12">
+            <div class = "col-md-6 mb-3">
+                <label for="{{ field_name(sortieForm.nom) }}"> Nom de la sortie </label>
+                <input type="text"
+                       id="{{ field_name(sortieForm.nom) }}"
+                       name="{{ field_name(sortieForm.nom) }}"
+                       value="{{ field_name(sortieForm.nom) }}"
+                       placeholder="{{ field_name(sortieForm.nom) }}"
+                       class="form-control"
+                       >
+            </div>
+
+            <div class = "col-md-6 mb-3">
+                {{ form_label(sortieForm.Campus )}}
+                {{ form_widget(sortieForm.Campus, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" >Enregistrer</button>
+        <button type="submit" class="btn btn-primary" >Publier la sortie</button>
+        <button type="submit" class="btn btn-primary" >Annuler</button>
+        {{ form_end(sortieForm) }}
+        <input type="datetime-local" id="start" name="trip-start"
+               value="2018-07-22">
+
+        </div>
+</div>
 
 {% endblock %}
