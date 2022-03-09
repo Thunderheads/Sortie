@@ -28,6 +28,21 @@ use Symfony\Component\Routing\Annotation\Route;
         }
 
         /**
+         * @Route("/home", name="home")
+         */
+        public function home(SortieRepository $repo, Request $req): Response
+        {
+            $co = new Sortie();
+            $form =  $this->createForm(SortieType::class, $co);
+            $form->handleRequest($req);
+
+            return $this->render('sortie/home.html.twig', [
+                'sorties' => $repo->findAll(),
+                'form' => $form->createView()
+            ]);
+        }
+
+        /**
          * @Route("/new/", name="creerUneSortie")
          */
         public function creerUneSortie(Request $req): Response

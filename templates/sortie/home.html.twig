@@ -1,29 +1,16 @@
+{% extends 'base.html.twig' %}
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet" />
-    <title>Document</title>
-</head>
-<body>
-<h3 class="mx-4">Filtrer les sorties</h3>
+{% block body %}
+<h2 class="mx-4">Filtrer les sorties</h2>
 <br>
 <div class="ben mx-4">
     <p>Campus</p>
-    <select class="mx-2" aria-label="Default select example">
 
-        <option value="1">toto</option>
+        <div class="fo mx-2">
+            {{ form_start(form.Campus) }}
+            {{ form_widget(form.Campus) }}
+            {{ form_end(form.Campus) }}
+        </div>
 
     </select>
 </div>
@@ -32,8 +19,9 @@
         <p>Le nom de la sortie contient</p>
         <input class="mx-2" type="text" name="search" placeholder="search">
 </div>
-<br>
-<div class="ben mx-4">
+
+    <div class="container">
+<div class="ben" style="width: 200px">
         <form class="ben my-sm-5">
             <label for="date" >Entre</label>
                 <div class="input-group date " id="datepicker">
@@ -54,8 +42,9 @@
                     </span>
                 </div>
         </form>
+</div>
 
-<br>
+
     <div class="mx-5">
 <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -85,13 +74,14 @@
     </label>
 </div>
     </div>
-    <button type="button" class="btn btn-secondary btn-lg my-sm-5" name="search">Rechercher</button>
+    <a href="" target="_blank"><button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Rechercher</button></a>
+
 </div>
 
 
     <div class="container mx-3">
     <div style="height: 400px; overflow: scroll">
-        <table class="table table-secondary">
+        <table class="table table-bordered">
             <thead>
             <th>Nom de la sortie</th>
             <th>Date de la sortie</th>
@@ -105,14 +95,14 @@
             <tbody>
             {% for c in sorties %}
             <tr>
-                <th>{{ c.nom }}</th>
-                <th>{{ c.lieu.ville.nom }}</th>
-                <th>{{ c.campus.nom }}</th>
-                <th>{{ c.nom }}</th>
-                <th>{{ c.nom }}</th>
-                <th>{{ c.nom }}</th>
-                <th>{{ c.nom }}</th>
-                <th>{{ c.nom }}</th>
+                <td>{{ c.nom }}</td>
+                <td>{{ c.dateHeureDebut|date('d/m/Y H:i') }}</td>
+                <td>{{ c.dateLimiteInscription|date('d/m/Y') }}</td>
+                <td>{{ c.participant|length }}</td>
+                <td>{{ c.etat.libelle }}</td>
+                <td>{{ c.nbInscriptionMax }}{{ c.nom}}</td>
+                <td>{{ c.organisateur.nom }}</td>
+                <td>{{ c.nom }}</td>
 
             </tr>
             {% endfor %}
@@ -120,9 +110,5 @@
         </table>
     </div>
     </div>
-    <button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Créer une sortie</button>
-
-
-
-</body>
-</html>
+<a href="{{ path('sortiecreerUneSortie') }}" target="_blank"><button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Créer une sortie</button></a>
+{% endblock %}
