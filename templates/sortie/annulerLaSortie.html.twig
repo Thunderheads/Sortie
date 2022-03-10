@@ -4,6 +4,7 @@
 <div class="container col-3">
     <h2>Annuler une sortie</h2>
     <div>
+
         <label><b>Nom de la sortie: </b></label>
         <label>{{ sortie.nom }}</label>
 
@@ -21,12 +22,14 @@
         <label>{{ sortie.lieu.nom }}</label>
     </div>
 <br>
-        <p><b>Motif: </b></p>
-        <textarea style="width: 300px ; height:100px"></textarea>
+    <p><b>Motif: </b></p>
+    <textarea style="height: 100px; width: 200px" type="text"{{ field_name(annuleForm.infosSortie) }}></textarea>
+
 
     <div class="ben">
         <a href="{{ path('sortiehome') }}" target="_blank"><button type="button" class="btn btn-secondary btn-lg my-sm-5" name="search">Enregistrer</button></a>
         <a href="{{ path('sortiehome') }}" target="_blank"><button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Annuler</button></a>
     </div>
     </div>
+
 {% endblock %}

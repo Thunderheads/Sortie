@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Campus;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Form\AnnulerType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use phpDocumentor\Reflection\Types\This;
@@ -87,10 +88,14 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/cancel/{id}", name="annulerLaSortie")
          */
-        public function annulerLaSortie(Sortie $sortie,SortieRepository $repo): Response
+        public function annulerLaSortie(Sortie $sortie,SortieRepository $repo,Request $requestA): Response
         {
+            $annuleForm = $this->createForm(AnnulerType::class, $sortie);
+            $annuleForm->handleRequest($requestA);
+
             return $this->render('sortie/annulerLaSortie.html.twig', [
-                'sortie'=>$sortie,
+                'annuleForm'=>$annuleForm->createView(),
+                'sortie'=>$sortie
 
             ]);
         }
