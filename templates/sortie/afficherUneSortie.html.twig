@@ -3,54 +3,105 @@
 {% block title %}Hello SortieController!{% endblock %}
 
 {% block body %}
-    <div class="titre">
-        <h2>Afficher une sortie</h2>
+
+    <div >
+        <h2 class="mb-5" id="titre">Afficher une sortie</h2>
     </div>
 
     <div class="container">
-        <div>
-            <label for="nomSortie">Nom de la sortie :</label> <p>{{ sortie.nom }}</p>
-            <label for="campus">Campus :</label> <p>{{ sortie.campus.nom}}</p>
-        </div>
-        <div>
-            <label for="dateHeureSortie">Date et heure de la sortie :</label> <p>{{ sortie.dateHeureDebut|date('d-m-Y H:i:s') }}</p>
-            <label for="lieu">Lieu :</label> <p>{{ sortie.lieu.nom }}</p>
-        </div>
-        <div>
-            <label for="dateLimiteInscription">Date limite inscription :</label> <p>{{ sortie.dateLimiteInscription|date('d-m-Y H:i:s') }}</p>
-            <label for="rue">Rue :</label> <p>{{ sortie.lieu.rue }}</p>
-        </div>
-        <div>
-            <label for="nombrePlaces">Nombre de places :</label> <p>{{ sortie.nbInscriptionMax }}</p>
-            <label for="codePostal">Code postal :</label> <p>{{ sortie.lieu.ville.codePostal }}</p>
-        </div>
-        <div>
-            <label for="durée">Durée :</label>  <p>{{ sortie.duree }}</p>
-            <label for="latitude">Latitude :</label>  <p>{{ sortie.lieu.latitude }}</p>
-        </div>
-        <div>
-            <label for="descriptionInfos">Description et infos :</label> <p>{{ sortie.infosSortie }}</p>
-            <label for="longitude">Longitude :</label> <p>{{ sortie.lieu.longitude }}</p>
+
+        <!--Ligne 1 nom de la sortie + campus-->
+        <div class="row col-12">
+            <div class="row col justify-content-around">
+                <label class="col-4 mb-3" for="nomSortie">Nom de la sortie :</label>
+                <span class="col-6 mb-3">{{ sortie.nom }}</span>
+            </div>
+            <div class="row col justify-content-around">
+                <label class="col-4 mb-3" for="campus">Campus :</label>
+                <span class="col-6 mb-3">{{ sortie.campus.nom }}</span>
+            </div>
         </div>
 
-        <div class="row">
-            <div class="col-4">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="col-1">Pseudo</th>
-                            <th scope="col" class="col-3">Nom</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                {% for s in sorties %}
-                        <tr>
-                            <td>{{  }}</td>
-                            <td>{{  }}</td>
-                        </tr>
-                {% endfor %}
-                    </tbody>
-                </table>
+        <!--Ligne 2 date heure sortie + lieu-->
+        <div class="row col-12">
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="dateHeureSortie">Date et heure de la sortie :</label>
+                    <span class="col-6 mb-3">{{ sortie.dateHeureDebut|date('d-m-Y H:i:s') }}</span>
+                </div>
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="lieu">Lieu :</label>
+                    <span class="col-6 mb-3">{{ sortie.lieu.nom }}</span>
+                </div>
+        </div>
+
+        <!--Ligne 3 date limite inscription + rue-->
+        <div class="row col-12">
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="dateLimiteInscription">Date limite inscription :</label>
+                    <span class="col-6 mb-3">{{ sortie.dateLimiteInscription|date('d-m-Y') }}</span>
+                </div>
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="rue">Rue :</label>
+                    <span class="col-6 mb-3">{{ sortie.lieu.rue }}</span>
+                </div>
+        </div>
+
+        <!--Ligne 4 nombre de places + code postal-->
+        <div class="row col-12">
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="nombrePlaces">Nombre de places :</label>
+                    <span class="col-6 mb-3">{{ sortie.nbInscriptionMax }}</span>
+                </div>
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="codePostal">Code postal :</label>
+                    <span class="col-6 mb-3">{{ sortie.lieu.ville.codePostal }}</span>
+                </div>
+        </div>
+
+        <!--Ligne 5 durée + latitude-->
+        <div class="row col-12">
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="durée">Durée :</label>
+                    <span class="col-6 mb-3">{{ sortie.duree }}</span>
+                </div>
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="latitude">Latitude :</label>
+                    <span class="col-6 mb-3">{{ sortie.lieu.latitude }}</span>
+                </div>
+        </div>
+
+        <!--Ligne 6 decription infos + longitude-->
+        <div class="row col-12">
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="descriptionInfos">Description et infos :</label>
+                    <span class="col-6 mb-3">{{ sortie.infosSortie }}</span>
+                </div>
+                <div class="row col justify-content-around">
+                    <label class="col-4 mb-3" for="longitude">Longitude :</label>
+                    <span class="col-6 mb-3">{{ sortie.lieu.longitude }}</span>
+                </div>
+        </div>
+
+        <div class="row mt-4 mx-3">
+            <div class="col-6">
+                <div style="overflow: scroll; height:250px;">
+                    <table class="table table-striped table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-1">Pseudo</th>
+                                <th scope="col" class="col-3">Nom</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in sortie.participant %}
+                                <tr>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.nom }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
