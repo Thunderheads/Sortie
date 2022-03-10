@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use App\Entity\Lieu;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -46,11 +47,15 @@ class SortieType extends AbstractType
         'choice_label' => 'nom'
 
     ])
-
-
+            // pour que les boutons soient de type submit
+            ->add('Enregistrer', SubmitType::class)
+            ->add('Publier', SubmitType::class)
+            ->add('Annuler', SubmitType::class)
         ;
     }
 
+
+    // ici se fait le lien avec la classe sortie
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

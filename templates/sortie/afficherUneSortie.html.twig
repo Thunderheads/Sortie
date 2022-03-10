@@ -5,7 +5,7 @@
 {% block body %}
 
     <div >
-        <h2 class="mb-5" id="titre">Afficher une sortie</h2>
+        <h2 class="mb-5 text-center" id="titre">Afficher une sortie</h2>
     </div>
 
     <div class="container">
@@ -82,25 +82,34 @@
                 </div>
         </div>
 
-        <div class="row mt-4 mx-3">
-            <div class="col-6">
-                <div style="overflow: scroll; height:250px;">
-                    <table class="table table-striped table-hover table-responsive">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="col-1">Pseudo</th>
-                                <th scope="col" class="col-3">Nom</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for user in sortie.participant %}
+        <div class="row">
+            <div class="row">
+                <div class="col-6">
+                    <div class="mt-4">
+                        <h3>Listes des particpants inscrits :</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div style="overflow: scroll; height:250px;">
+                        <table class="table table-striped table-hover table-responsive">
+                            <thead>
                                 <tr>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.nom }}</td>
+                                    <th scope="col" class="col-1">Pseudo</th>
+                                    <th scope="col" class="col-3">Nom</th>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {% for user in sortie.participant %}
+                                    <tr>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.nom }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
