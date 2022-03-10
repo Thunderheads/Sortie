@@ -47,15 +47,11 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function creerUneSortie(Request $req): Response
         {
-
             //creation d'instance
             $sortie = new  Sortie();
 
             $sortieForm = $this->createForm(SortieType::class, $sortie);
             $sortieForm->handleRequest($req);
-
-            if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
-
 
                 if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
                     return $this->redirectToRoute('app_main');
@@ -64,7 +60,6 @@ use Symfony\Component\Routing\Annotation\Route;
                 return $this->render('sortie/creerUneSortie.html.twig', [
                     "sortieForm" => $sortieForm->createView()
                 ]);
-            }
         }
 
         /**
