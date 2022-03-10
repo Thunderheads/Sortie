@@ -16,8 +16,8 @@
         {{ form_start(sortieForm) }}
 
         <!-- ligne 1-->
-        <div class="form-row col-12">
-            <div class = "col-md-6 mb-3">
+        <div class="form-row col-12 d-flex justify-content-around">
+            <div class = "col-md-5 mb-3">
                 <label for="{{ field_name(sortieForm.nom) }}"> Nom de la sortie </label>
                 <input type="text"
                        id="{{ field_name(sortieForm.nom) }}"
@@ -28,18 +28,130 @@
                        >
             </div>
 
-            <div class = "col-md-6 mb-3">
+            <div class = "col-md-5 mb-3">
                 {{ form_label(sortieForm.Campus )}}
                 {{ form_widget(sortieForm.Campus, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" >Enregistrer</button>
-        <button type="submit" class="btn btn-primary" >Publier la sortie</button>
-        <button type="submit" class="btn btn-primary" >Annuler</button>
+        <!-- ligne 2-->
+        <div class="form-row col-12 d-flex justify-content-around">
+            <div class = "col-md-5 mb-3">
+                <label for="{{ field_name(sortieForm.dateHeureDebut) }}"> Date et heure de la sortie : </label>
+                <input type="datetime-local"
+                       id="{{ field_name(sortieForm.dateHeureDebut) }}"
+                       name="{{ field_name(sortieForm.dateHeureDebut) }}"
+                       value="{{ field_name(sortieForm.dateHeureDebut) }}">
+            </div>
+
+            <div class = "col-md-5 mb-3 ">
+                {{ form_label(sortieForm.Lieu )}}
+                {{ form_widget(sortieForm.Lieu, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
+            </div>
+        </div>
+
+        <!-- ligne 3-->
+        <div class="form-row col-12 d-flex justify-content-around">
+            <div class = "col-md-5 mb-3">
+                <label for="{{ field_name(sortieForm.dateLimiteInscription) }}"> Date limite d'inscription : </label>
+                <input type="datetime-local"
+                       id="{{ field_name(sortieForm.dateLimiteInscription) }}"
+                       name="{{ field_name(sortieForm.dateLimiteInscription) }}"
+                       value="{{ field_name(sortieForm.dateLimiteInscription) }}">
+            </div>
+
+            <div class = "col-md-5 mb-3">
+                <label> Lieu </label>
+            </div>
+        </div>
+
+
+        <!-- ligne 4-->
+        <div class="form-row col-12 d-flex justify-content-around">
+            <div class = "col-md-5 mb-3">
+                <label for="{{ field_name(sortieForm.nbInscriptionMax) }}"> Nombre de places : </label>
+                <input type="number"
+                       id="{{ field_name(sortieForm.nbInscriptionMax) }}"
+                       name="{{ field_name(sortieForm.nbInscriptionMax) }}"
+                       value="{{ field_name(sortieForm.nbInscriptionMax) }}"
+                       class="form-control">
+            </div>
+
+            <div class = "col-md-5 mb-3 ">
+                <label> Rue </label>
+            </div>
+        </div>
+
+
+        <!-- ligne 5-->
+        <div class="form-row col-12 d-flex justify-content-around">
+            <div class = "col-md-5 mb-3">
+                <label for="{{ field_name(sortieForm.duree) }}"> Durée : </label>
+                <input type="number"
+                       id="{{ field_name(sortieForm.duree) }}"
+                       name="{{ field_name(sortieForm.duree) }}"
+                       value="{{ field_name(sortieForm.duree) }}"
+                        class="form-control">
+            </div>
+
+            <div class = "col-md-5 mb-3">
+                <label> Code postal </label>
+            </div>
+        </div>
+
+
+        <!-- ligne 6-->
+        <div class="form-row col-12 d-flex justify-content-around">
+            <div class = "col-md-5 mb-3">
+                <label for="{{ field_name(sortieForm.duree) }}"> Durée : </label>
+                <input type="number"
+                       id="{{ field_name(sortieForm.duree) }}"
+                       name="{{ field_name(sortieForm.duree) }}"
+                       value="{{ field_name(sortieForm.duree) }}"
+                       class="form-control">
+            </div>
+
+            <div class = "col-md-5 mb-3">
+                <label> Code postal </label>
+            </div>
+        </div>
+
+
+        <!-- ligne 7 -->
+
+        <div class="form-row col-12 d-flex justify-content-around">
+            <div class = "col-md-5 mb-3">
+                <label for="{{ field_name(sortieForm.infosSortie) }}"> Description : </label>
+                <input type="textarea"
+                       id="{{ field_name(sortieForm.infosSortie) }}"
+                       name="{{ field_name(sortieForm.infosSortie) }}"
+                       value="{{ field_name(sortieForm.infosSortie) }}"
+                       class="form-control">
+            </div>
+
+            <div class = "col-md-5 mb-3">
+                <label> Latitude </label>
+                <label> Longitude </label>
+            </div>
+        </div>
+
+        <!-- ligne des boutons -->
+
+        <div class="form-row col-12 d-flex justify-content-center mt-3">
+            <div class="col-2">
+                {{ form_widget(sortieForm.Enregistrer, {'attr': {'class':'btn btn-primary'}}) }}
+            </div>
+            <div class="col-2">
+                {{ form_widget(sortieForm.Publier, {'attr': {'class':'btn btn-primary'}}) }}
+            </div >
+            <div>
+                {{ form_widget(sortieForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
+            </div >
+
+        </div>
+
         {{ form_end(sortieForm) }}
-        <input type="datetime-local" id="start" name="trip-start"
-               value="2018-07-22">
+
 
         </div>
 </div>
