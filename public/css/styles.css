@@ -63,7 +63,6 @@
   --bs-body-color: #212529;
   --bs-body-bg: #fff;
 }
-
 #accrobranche {
   width: 100%;
   vertical-align: middle;
@@ -71,6 +70,10 @@
 
 #logo {
   vertical-align: middle;
+}
+
+#titre {
+  text-align: center;
 }
 
 *,
@@ -310,6 +313,7 @@ svg {
   vertical-align: middle;
 }
 */
+
 table {
   caption-side: bottom;
   border-collapse: collapse;
