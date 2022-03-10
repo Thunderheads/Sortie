@@ -113,12 +113,12 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/show/{id}", name="afficherUneSortie")
          */
-        public function afficherUneSortie(Sortie $sortie,SortieRepository $repo): Response
+        public function afficherUneSortie($id,SortieRepository $repo): Response
         {
-            dd($sortie);
+            $sortie = $repo->find($id);
+
             return $this->render('sortie/afficherUneSortie.html.twig', [
                 'sortie' => $sortie,
-                'sorties' => $repo->findAll()
             ]);
         }
 
