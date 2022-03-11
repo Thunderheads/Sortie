@@ -3,33 +3,35 @@
 {% block body %}
 <div class="container col-3">
     <h2>Annuler une sortie</h2>
-    <div>
-
-        <label><b>Nom de la sortie: </b></label>
-        <label>{{ sortie.nom }}</label>
-
-    </div>
-    <div>
-        <label><b>Date de la sortie: </b></label>
-        <label>{{ sortie.dateHeureDebut|date('d-m-Y H:i:s') }}</label>
-    </div>
-    <div>
-        <label><b>Campus: </b></label>
-        <label>{{ sortie.campus.nom }}</label>
-    </div>
-    <div>
-        <label><b>Lieu: </b></label>
-        <label>{{ sortie.lieu.nom }}</label>
-    </div>
 <br>
-    <p><b>Motif: </b></p>
-    <textarea style="height: 100px; width: 200px" type="text"{{ field_name(annuleForm.infosSortie) }}></textarea>
-
-
-    <div class="ben">
-        <a href="{{ path('sortiehome') }}" target="_blank"><button type="button" class="btn btn-secondary btn-lg my-sm-5" name="search">Enregistrer</button></a>
-        <a href="{{ path('sortiehome') }}" target="_blank"><button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Annuler</button></a>
+<div class="form-row col-11 d-flex justify-content-around">
+    <div class=" col-6 ">
+        <p><b>Nom de la sortie: </b></p>
+        <p><b>Date de la sortie: </b></p>
+        <p><b>Campus: </b></p>
+        <p><b>Lieu: </b></p>
     </div>
+    <div class=" col-6">
+        <p>{{ sortie.nom }}</p>
+        <p>{{ sortie.dateHeureDebut|date('d-m-Y H:i:s') }}</p>
+        <p>{{ sortie.campus.nom }}</p>
+        <p>{{ sortie.lieu.nom }}</p>
+    </div>
+</div>
+
+    <p><b>Motif: </b></p>
+    {{ form_start(annuleForm) }}
+
+   {{ form_row(annuleForm.infos) }}
+
+    <div class="form-row col-12 d-flex justify-content-center mt-3">
+        <div class="col-6">
+        {{ form_row(annuleForm.Enregistrer, {'attr': {'class':'btn btn-primary'}}) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(annuleForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
+            {{ form_end(annuleForm) }}
+        </div>
     </div>
 
 {% endblock %}
