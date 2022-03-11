@@ -66,6 +66,11 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $campus;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $pseudo;
+
 
     public function getId(): ?int
     {
@@ -240,5 +245,17 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
     }
 }

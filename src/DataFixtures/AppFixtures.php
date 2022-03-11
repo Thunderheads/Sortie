@@ -125,6 +125,7 @@ class AppFixtures extends Fixture
             $participant->setEmail($this->faker->email);
             $participant->setPassword($this->hasher->hashPassword($participant, '123'));
             $participant->setActif(true);
+            $participant->setPseudo($this->faker->userName);
 
             $campus = $this->manager->getRepository(Campus::class)->findAll();
             $participant->setCampus($this->faker->randomElement($campus));

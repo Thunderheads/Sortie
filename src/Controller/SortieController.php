@@ -6,6 +6,7 @@ use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Form\UpdateSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
@@ -113,10 +114,8 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/show/{id}", name="afficherUneSortie")
          */
-        public function afficherUneSortie($id,SortieRepository $repo): Response
+        public function afficherUneSortie(Sortie $sortie,SortieRepository $repo ): Response
         {
-            $sortie = $repo->find($id);
-
             return $this->render('sortie/afficherUneSortie.html.twig', [
                 'sortie' => $sortie,
             ]);
@@ -125,10 +124,67 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/update/{id}", name="modifierUneSortie")
          */
-        public function modifierUneSortie(): Response
+        public function modifierUneSortie(Request $req, Sortie $sortie, SortieRepository $sortieRepository, EntityManagerInterface $em, ParticipantRepository $participantRepository, EtatRepository $etatRepository): Response
         {
+
+
+            $sortieForm = $this->createForm(UpdateSortieType::class, $sortie);
+            $sortieForm->handleRequest($req);
+
+
+            //Si le formulaire est valide et soumis
+            if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
+                //permet d'attribuer la sortie à un organisateur
+                $organisateur = $participantRepository->find(1);
+                $sortie->setOrganisateur($organisateur);
+
+                //si le bouton publier est cliqué
+                if($sortieForm->get('Publier')->isClicked()){
+
+                    //etat ouverte comme on choisit de publier
+                    $etat = $etatRepository->findOneBy(['libelle' => 'Ouverte']);
+                    $sortie->setEtat($etat);
+
+
+                    $em->persist($sortie);
+                    $em->flush();
+
+                    //redirection vers la page d'accueil
+                    return $this->redirectToRoute('sortiehome');
+                }
+
+                //si le bouton Enregistrer est cliqué
+                if($sortieForm->get('Enregistrer')->isClicked()){
+
+                    //mise en place de l'état crée
+                    $etat = $etatRepository->findOneBy(['libelle' => 'Créée']);
+                    $sortie->setEtat($etat);
+
+
+                    $em->persist($sortie);
+                    $em->flush();
+                    //redirection vers la page d'accueil
+                    return $this->redirectToRoute('sortiehome');
+                }
+
+                //si le bouton Annuler est cliqué
+                if($sortieForm->get('Annuler')->isClicked()){
+
+                    //redirection vers la page d'accueil
+                    return $this->redirectToRoute('sortiehome');
+
+                }
+
+                if($sortieForm->get('Supprimer')->isClicked()){
+                    $em->remove($sortie);
+                    $em->flush();
+                    return $this->redirectToRoute('sortiehome');
+                }
+            }
             return $this->render('sortie/modifierUneSortie.html.twig', [
-                'controller_name' => 'SortieController'
+                "sortieForm" => $sortieForm->createView(),
+                "sortie" => $sortie
             ]);
         }
 
