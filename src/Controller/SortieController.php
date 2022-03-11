@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Form\AnnulerType;
 use App\Form\SortieType;
 use App\Form\UpdateSortieType;
 use App\Repository\EtatRepository;
@@ -30,20 +31,7 @@ use Symfony\Component\Routing\Annotation\Route;
             ]);
         }
 
-        /**
-         * @Route("/home", name="home")
-         */
-        public function home(SortieRepository $repo, Request $req): Response
-        {
-            $co = new Sortie();
-            $form = $this->createForm(SortieType::class, $co);
-            $form->handleRequest($req);
 
-            return $this->render('sortie/home.html.twig', [
-                'sorties' => $repo->findAll(),
-                'form' => $form->createView()
-            ]);
-        }
 
         /**
          * @Route("/new/", name="creerUneSortie")
@@ -52,7 +40,8 @@ use Symfony\Component\Routing\Annotation\Route;
         {
 
             /**
-             * @TODO pour la creation regarder l'heure elle est pas correcte en base de données
+             * TODO modifier la creation pour prendre en compte le bon organisateur
+             * TODO si une personne arrive sur la page et qu'elle veut annuler elle doit pouvoir annuler sans remplir de champ
              */
             //creation d'instance
             $sortie = new  Sortie();
@@ -69,6 +58,7 @@ use Symfony\Component\Routing\Annotation\Route;
                 //si le bouton publier est cliqué
                 if($sortieForm->get('Publier')->isClicked()){
 
+
                     //etat ouverte comme on choisit de publier
                     $etat = $etatRepository->findOneBy(['libelle' => 'Ouverte']);
                     $sortie->setEtat($etat);
@@ -78,7 +68,7 @@ use Symfony\Component\Routing\Annotation\Route;
                     $em->flush();
 
                     //redirection vers la page d'accueil
-                    return $this->redirectToRoute('sortiehome');
+                    return $this->redirectToRoute('home');
                 }
 
                 //si le bouton Enregistrer est cliqué
@@ -92,14 +82,14 @@ use Symfony\Component\Routing\Annotation\Route;
                     $em->persist($sortie);
                     $em->flush();
                     //redirection vers la page d'accueil
-                    return $this->redirectToRoute('sortiehome');
+                    return $this->redirectToRoute('home');
                 }
 
                 //si le bouton Annuler est cliqué
                 if($sortieForm->get('Annuler')->isClicked()){
 
                     //redirection vers la page d'accueil
-                    return $this->redirectToRoute('sortiehome');
+                    return $this->redirectToRoute('home');
 
                 }
             }
@@ -191,11 +181,61 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/cancel/{id}", name="annulerLaSortie")
          */
-        public function annulerLaSortie(Sortie $sortie,SortieRepository $repo): Response
+        public function annulerLaSortie(Sortie $sortie,SortieRepository $repo,Request $requestA, EtatRepository $etatrepo, EntityManagerInterface $em): Response
         {
+            //je crée mon form avc les parametres dans la classe annulerType
+            $annuleForm = $this->createForm(AnnulerType::class);
+            $annuleForm->handleRequest($requestA);
+
+            if ($annuleForm->isSubmitted() && $annuleForm->isValid()) {
+
+                //si le bouton Enregistrer est cliqué
+                if ($annuleForm->get('Enregistrer')->isClicked()) {
+
+                    //mise en place de l'état annuler
+                    $etat = $etatrepo->findOneBy(['libelle' => 'Annulée']);
+                    $sortie->setEtat($etat);
+
+                    /**
+                     * TODO $motif
+                     */
+
+                    $em->persist($sortie);
+                    $em->flush();
+                    //redirection vers la page d'accueil
+                    return $this->redirectToRoute('sortiehome');
+                }
+
+                //si le bouton Annuler est cliqué
+                if ($annuleForm->get('Annuler')->isClicked()) {
+
+                    //redirection vers la page d'accueil
+                    return $this->redirectToRoute('sortiehome');
+
+                }
+            }
+
             return $this->render('sortie/annulerLaSortie.html.twig', [
                 'sortie'=>$sortie,
+                'annuleForm'=>$annuleForm->createView()
 
+            ]);
+        }
+
+        /**
+         * @Route("/profil/{id}", name="monProfil")
+         */
+        public function profil($id, Participant $participant, ParticipantRepository $partRepo, Request $req): Response
+        {
+            $user = $partRepo->find($id);
+
+            $formUser = $this->createForm(SortieType::class);
+            $formUser->handleRequest($req);
+
+
+
+            return $this->render('sortie/monProfil.html.twig', [
+                'formUser' => $formUser->createView()
             ]);
         }
     }

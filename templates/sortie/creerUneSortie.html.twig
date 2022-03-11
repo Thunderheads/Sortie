@@ -29,19 +29,21 @@
             </div>
 
             <div class = "col-md-5 mb-3">
-                {{ form_label(sortieForm.Campus )}}
+                {{ form_label(sortieForm.Campus ) }}
                 {{ form_widget(sortieForm.Campus, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
             </div>
         </div>
 
         <!-- ligne 2-->
+
         <div class="form-row col-12 d-flex justify-content-around">
             <div class = "col-md-5 mb-3">
                 <label for="{{ field_name(sortieForm.dateHeureDebut) }}"> Date et heure de la sortie : </label>
                 <input type="datetime-local"
                        id="{{ field_name(sortieForm.dateHeureDebut) }}"
                        name="{{ field_name(sortieForm.dateHeureDebut) }}"
-                       value="{{ field_name(sortieForm.dateHeureDebut) }}">
+                       value="{{ field_name(sortieForm.dateHeureDebut) }}"
+                >
             </div>
 
             <div class = "col-md-5 mb-3 ">
@@ -103,37 +105,22 @@
         <!-- ligne 6-->
         <div class="form-row col-12 d-flex justify-content-around">
             <div class = "col-md-5 mb-3">
-                <label for="{{ field_name(sortieForm.duree) }}"> Durée : </label>
-                <input type="number"
-                       id="{{ field_name(sortieForm.duree) }}"
-                       name="{{ field_name(sortieForm.duree) }}"
-                       value="{{ field_name(sortieForm.duree) }}"
+                <label for="{{ field_name(sortieForm.infosSortie) }}"> Description : </label>
+                <input type="textarea"
+                       id="{{ field_name(sortieForm.infosSortie) }}"
+                       name="{{ field_name(sortieForm.infosSortie) }}"
+                       value="Votre texte"
                        class="form-control">
             </div>
 
             <div class = "col-md-5 mb-3">
                 <label> Code postal </label>
-            </div>
-        </div>
-
-
-        <!-- ligne 7 -->
-
-        <div class="form-row col-12 d-flex justify-content-around">
-            <div class = "col-md-5 mb-3">
-                <label for="{{ field_name(sortieForm.infosSortie) }}"> Description : </label>
-                <input type="textarea"
-                       id="{{ field_name(sortieForm.infosSortie) }}"
-                       name="{{ field_name(sortieForm.infosSortie) }}"
-                       value="{{ field_name(sortieForm.infosSortie) }}"
-                       class="form-control">
-            </div>
-
-            <div class = "col-md-5 mb-3">
                 <label> Latitude </label>
                 <label> Longitude </label>
             </div>
         </div>
+
+
 
         <!-- ligne des boutons -->
 
@@ -155,5 +142,6 @@
 
         </div>
 </div>
+
 
 {% endblock %}

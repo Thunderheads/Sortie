@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Sortie;
 use App\Entity\Lieu;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,17 +18,21 @@ class SortieType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('dateHeureDebut', DateType::class, [
+
+            //utiliser le datetime pour avoir le temps en minute
+            ->add('dateHeureDebut', DateTimeType::class, [
                 'label' => 'dateHeureDebut',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('dateLimiteInscription',DateType::class, [
+            ->add('dateLimiteInscription',DateTimeType::class, [
                 'label' => 'dateLimiteInscription ',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
+                'input'=> 'datetime',
+                'input_format'=>'Y-m-d H:i:s'
             ])
             ->add('nbInscriptionMax')
             ->add('duree')
@@ -44,7 +49,8 @@ class SortieType extends AbstractType
         // looks for choices from this entity
         'class' => Lieu::class,
         // uses the User.username property as the visible option string
-        'choice_label' => 'nom'
+        'choice_label' => 'nom',
+                'placeholder' => 'choisir un lieu'
 
     ])
             // pour que les boutons soient de type submit

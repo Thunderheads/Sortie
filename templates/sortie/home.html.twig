@@ -1,114 +1,151 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h2 class="mx-4">Filtrer les sorties</h2>
-<br>
-<div class="ben mx-4">
-    <label>Campus</label>
-    <label>
-        <div class="fo mx-2">
-            {{ form_start(form.Campus) }}
-            {{ form_widget(form.Campus) }}
-            {{ form_end(form.Campus) }}
+    <div class="container-fluid">
+        <h2 class="mx-4">Filtrer les sorties</h2>
+
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-4">
+                <!-- ligne campus -->
+                <div class="row">
+                    <div class="col">
+                        {{ form_label(form.Campus ) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.Campus,{'attr':
+                            {
+                                'class':"form-select",
+                                'aria-label':"Default select example",
+                                'width':'fit'
+                            }}) }}
+                    </div>
+
+
+                </div>
+
+                <!-- champ de recherche -->
+                <div class="row">
+                    <div class="col">
+                        {{ form_label(form.recherche ) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.recherche,{'attr':
+                            {
+                                'class':"form-control",
+                            }}) }}
+                    </div>
+
+                </div>
+
+
+                <!-- date debut fin -->
+                <div class="row">
+                    <div class="col">
+                        {{ form_label(form.dateDebutRecherche ) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.dateDebutRecherche,{'attr':
+                            {
+                                'class':"form-control",
+                            }}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_label(form.dateFin ) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.dateFin,{'attr':
+                            {
+                                'class':"form-control",
+                            }}) }}
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- check box -->
+            <div class="col-2">
+
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.sortieOrganisees) }}
+                    </div>
+                    <div class="col">
+                        {{ form_label(form.sortieOrganisees ) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.sortieInscrit) }}
+                    </div>
+                    <div class="col">
+                        {{ form_label(form.sortieInscrit ) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.sortieNonInscrit) }}
+                    </div>
+                    <div class="col">
+                        {{ form_label(form.sortieNonInscrit ) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.sortiePass) }}
+                    </div>
+                    <div class="col">
+                        {{ form_label(form.sortiePass ) }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- bouton recherche -->
+            <div class="col-4">
+                <div class="row">
+                    {{ form_widget(form.Enregistrer, {'attr': {'class':'btn btn-primary'}}) }}
+                </div>
+            </div>
         </div>
-    </label>
-    </select>
-</div>
-<br>
-<div class="ben mx-4">
-        <label>Le nom de la sortie contient</label>
-        <input class="mx-2" type="text" name="search" placeholder="search">
-</div>
 
-    <div class="container">
-<div class="ben" style="width: 200px">
-        <form class="ben my-sm-5">
-            <label for="date" >Entre</label>
-                <div class="input-group date " id="datepicker">
-                    <input type="datetime-local" id="start" name="trip-start"
-                           value="2018-07-22"
-                           min="2018-01-01" max="2018-12-31">
-                    <span class="input-group-append">
-                        </span>
-                    </span>
-                </div>
-            <label for="date" >et</label>
-                <div class="input-group date" id="datepicker">
-                    <input type="datetime-local" id="start" name="trip-start"
-                           value="2018-07-22"
-                           min="2018-01-01" max="2018-12-31">
-                    <span class="input-group-append">
-                        </span>
-                    </span>
-                </div>
-        </form>
-</div>
+        {{ form_end(form) }}
 
+        <div class="container mx-3">
+            <div style="height: 400px; overflow: scroll">
+                <table class="table table-bordered">
+                    <thead>
+                    <th>Nom de la sortie</th>
+                    <th>Date de la sortie</th>
+                    <th>Clôture</th>
+                    <th>inscrits/places</th>
+                    <th>Etat</th>
+                    <th>Inscrit</th>
+                    <th>Organisateur</th>
+                    <th>actions</th>
+                    </thead>
+                    <tbody>
+                    {% for c in sorties %}
+                        <tr>
+                            <td>{{ c.nom }}</td>
+                            <td>{{ c.dateHeureDebut|date('d/m/Y H:i') }}</td>
+                            <td>{{ c.dateLimiteInscription|date('d/m/Y') }}</td>
+                            <td>{{ c.participant|length }} / {{ c.nbInscriptionMax }}</td>
+                            <td>{{ c.etat.libelle }}</td>
+                            <td>{{ c.nom }}</td>
+                            <td>{{ c.organisateur.nom }}</td>
+                            <td>{{ c.nom }}</td>
 
-    <div class="mx-5">
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
-        Sorties dont je suis l'organisateur/trice
-    </label>
-</div>
-
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-    <label class="form-check-label" for="flexCheckChecked">
-        Sorties auxquelles je suis inscrit/e
-    </label>
-</div>
-
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-    <label class="form-check-label" for="flexCheckChecked">
-        Sorties auxquelles je ne suis pas inscrit/e
-    </label>
-</div>
-
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-    <label class="form-check-label" for="flexCheckChecked">
-        Sorties passées
-    </label>
-</div>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <a href="{{ path('sortiecreerUneSortie') }}" target="_blank">
+            <button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Créer une sortie</button>
+        </a>
     </div>
-    <a href="" target="_blank"><button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Rechercher</button></a>
-
-</div>
-
-
-    <div class="container mx-3">
-    <div style="height: 400px; overflow: scroll">
-        <table class="table table-bordered">
-            <thead>
-            <th>Nom de la sortie</th>
-            <th>Date de la sortie</th>
-            <th>Clôture</th>
-            <th>inscrits/places</th>
-            <th>Etat</th>
-            <th>Inscrit</th>
-            <th>Organisateur</th>
-            <th>actions</th>
-            </thead>
-            <tbody>
-            {% for c in sorties %}
-            <tr>
-                <td>{{ c.nom }}</td>
-                <td>{{ c.dateHeureDebut|date('d/m/Y H:i') }}</td>
-                <td>{{ c.dateLimiteInscription|date('d/m/Y') }}</td>
-                <td>{{ c.participant|length }}</td>
-                <td>{{ c.etat.libelle }}</td>
-                <td>{{ c.nbInscriptionMax }}{{ c.nom}}</td>
-                <td>{{ c.organisateur.nom }}</td>
-                <td>{{ c.nom }}</td>
-
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    </div>
-<a href="{{ path('sortiecreerUneSortie') }}" target="_blank"><button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Créer une sortie</button></a>
 {% endblock %}
