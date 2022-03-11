@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Logo Sortir.com</h1>
+    {{ form_start(annuleForm) }}
+    <div>
+        <label>Pseudo: </label>
+        <input>
+    </div>
+    <div>
+        <label>Prénom: </label>
+        <input>
+    </div>
+    <div>
+        <label>Nom: </label>
+        <input>
+    </div>
+    <div>
+        <label>Téléphone: </label>
+        <input>
+    </div>
+    <div>
+        <label>Email: </label>
+        <input>
+    </div>
+    <div>
+        <label>Mot de passe: </label>
+        <input>
+    </div>
+    <div>
+        <label>Confirmation: </label>
+        <input>
+    </div>
+    <div>
+        <label>Campus</label>
+        <label>
+            <div class="fo mx-2">
+                {{ form_start(form.Campus) }}
+                {{ form_widget(form.Campus) }}
+                {{ form_end(form.Campus) }}
+            </div>
+        </label>
+    </div>
+    <div>
+        <label>Ma photo: </label>
+        <button>Télécharger vers le serveur</button>
+    </div>
+    <div class="form-row col-12 d-flex justify-content-center mt-3">
+        <div class="col-6">
+            {{ form_row(annuleForm.Enregistrer, {'attr': {'class':'btn btn-primary'}}) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(annuleForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
+            {{ form_end(annuleForm) }}
+        </div>
+    </div>
+{% endblock %}

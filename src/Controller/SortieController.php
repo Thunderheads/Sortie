@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Form\AnnulerType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
@@ -124,11 +125,61 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/cancel/{id}", name="annulerLaSortie")
          */
-        public function annulerLaSortie(Sortie $sortie,SortieRepository $repo): Response
+        public function annulerLaSortie(Sortie $sortie,SortieRepository $repo,Request $requestA, EtatRepository $etatrepo, EntityManagerInterface $em): Response
         {
+            //je crée mon form avc les parametres dans la classe annulerType
+            $annuleForm = $this->createForm(AnnulerType::class);
+            $annuleForm->handleRequest($requestA);
+
+            if ($annuleForm->isSubmitted() && $annuleForm->isValid()) {
+
+                //si le bouton Enregistrer est cliqué
+                if ($annuleForm->get('Enregistrer')->isClicked()) {
+
+                    //mise en place de l'état annuler
+                    $etat = $etatrepo->findOneBy(['libelle' => 'Annulée']);
+                    $sortie->setEtat($etat);
+
+                    /**
+                     * TODO $motif
+                     */
+
+                    $em->persist($sortie);
+                    $em->flush();
+                    //redirection vers la page d'accueil
+                    return $this->redirectToRoute('sortiehome');
+                }
+
+                //si le bouton Annuler est cliqué
+                if ($annuleForm->get('Annuler')->isClicked()) {
+
+                    //redirection vers la page d'accueil
+                    return $this->redirectToRoute('sortiehome');
+
+                }
+            }
+
             return $this->render('sortie/annulerLaSortie.html.twig', [
                 'sortie'=>$sortie,
+                'annuleForm'=>$annuleForm->createView()
 
+            ]);
+        }
+
+        /**
+         * @Route("/profil/{id}", name="monProfil")
+         */
+        public function profil($id, Participant $participant, ParticipantRepository $partRepo, Request $req): Response
+        {
+            $user = $partRepo->find($id);
+
+            $formUser = $this->createForm(SortieType::class);
+            $formUser->handleRequest($req);
+
+
+
+            return $this->render('sortie/monProfil.html.twig', [
+                'formUser' => $formUser->createView()
             ]);
         }
     }
