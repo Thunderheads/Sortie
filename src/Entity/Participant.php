@@ -96,7 +96,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      *     minMessage="Le pseudo doit être composé de 5 caractères au minimum",
      *     maxMessage="Le numéro de téléphone doit être composé de 100 caractères au maximum")
      * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux sauf "-" "_" seulement si ils ne sont ni au début ni à la fin du pseudo
-     * @Assert\Regex(pattern="^(?=.{3,20}$)(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9_-]+([^._-])$")
+     * @Assert\Regex(pattern="/(?=.{3,20}$)(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9_-]+([^._-])$/")
      * @ORM\Column(type="string", length=100)
      */
     private $pseudo;

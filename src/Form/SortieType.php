@@ -5,12 +5,14 @@ namespace App\Form;
 use App\Entity\Campus;
 use App\Entity\Sortie;
 use App\Entity\Lieu;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Button;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -55,6 +57,11 @@ class SortieType extends AbstractType
                 'placeholder' => 'choisir un lieu'
 
     ])
+
+            ->add('Rue', null, ["mapped"=>false])
+            ->add('CodePostal', null, ["mapped"=>false])
+            ->add('Latitude', null, ["mapped"=>false])
+            ->add('Longitude', null, ["mapped"=>false])
             // pour que les boutons soient de type submit
             ->add('Enregistrer', SubmitType::class)
             ->add('Publier', SubmitType::class)
