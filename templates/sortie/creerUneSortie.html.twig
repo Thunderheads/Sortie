@@ -132,7 +132,9 @@
                 {{ form_widget(sortieForm.Publier, {'attr': {'class':'btn btn-primary'}}) }}
             </div >
             <div>
-                {{ form_widget(sortieForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
+                <a href="{{ asset('home') }}">
+                    {{ form_widget(sortieForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
+                </a>
             </div >
 
         </div>

@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -20,31 +21,49 @@ class Sortie
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner un nom de sortie.")
+     * @Assert\Length(min="3", max="100",
+     *     minMessage="Trop court. Au moins 3 caractères.",
+     *     maxMessage="Trop long. Maximum 100 caractères.")
+     * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux dans le champ
+     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/",
+     *     message="Le nom de la sortie ne doit pas contenir de caractères spéciaux")
      * @ORM\Column(type="string", length=100)
      */
     private $nom;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner la date et l'heure du début de la sortie.")
      * @ORM\Column(type="datetime")
      */
     private $dateHeureDebut;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner la durée de la sortie en minutes")
+     * Cette assert oblige à inscrire un chiffre supérieur à 0
+     * @Assert\Positive
      * @ORM\Column(type="smallint")
      */
     private $duree;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner la date limite d'inscription à la sortie.")
      * @ORM\Column(type="datetime")
      */
     private $dateLimiteInscription;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner le nombre maximum d'inscrit à la sortie")
+     * Cette assert oblige à inscrire un chiffre supérieur à 0
+     * @Assert\Positive
      * @ORM\Column(type="smallint")
      */
     private $nbInscriptionMax;
 
     /**
+     * @Assert\Length(min="30", max="5000",
+     *     minMessage="Trop court. Au moins 30 caractères.",
+     *     maxMessage="Trop long. Maximum 5000 caractères.")
      * @ORM\Column(type="text")
      */
     private $infosSortie;
