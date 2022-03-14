@@ -8,14 +8,18 @@ use App\Entity\Sortie;
 use App\Form\AnnulerType;
 use App\Form\SortieType;
 use App\Form\UpdateSortieType;
+use App\Form\UserType;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 /**
  * @Route("/trip", name="sortie")
  */
@@ -225,17 +229,42 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/profil/{id}", name="monProfil")
          */
-        public function profil($id, Participant $participant, ParticipantRepository $partRepo, Request $req): Response
+        public function profil($id, ParticipantRepository $partRepo, Request $req, SluggerInterface $slugger): Response
         {
+            //j'identifie la personne connecter
             $user = $partRepo->find($id);
 
-            $formUser = $this->createForm(SortieType::class);
+            //je crée le formulaire
+            $formUser = $this->createForm(UserType::class, $user);
             $formUser->handleRequest($req);
+
+            if($formUser->isSubmitted() && $formUser->isValid()) {
+                $imageDoss = $formUser->get('image')->getData();
+
+                if($imageDoss) {
+                    $nomFichier = pathinfo($imageDoss->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeNom = $slugger->slug($nomFichier);
+                    $newNom = $safeNom.'-'.uniqid().'.'.$imageDoss->guessExtension();
+
+                    try {
+                        $imageDoss->move(
+                            $this->getParameter('img_drectory'),
+                            $newNom
+                        );
+                    } catch (FileException $e) {
+
+                    }
+                    $user->setImage($newNom);
+                }
+                return $this->redirectToRoute('home');
+            }
+
 
 
 
             return $this->render('sortie/monProfil.html.twig', [
                 'formUser' => $formUser->createView()
+
             ]);
         }
     }
