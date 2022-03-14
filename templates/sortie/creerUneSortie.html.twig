@@ -5,146 +5,87 @@
 
 
 {% block body %}
-<div class ="container-fluid">
-    <div class="card ">
-        <div class="card-header text-white bg-info">
-            Créer une Sortie
-        </div>
-    </div>
+    <div class ="container-fluid">
+        <div class="card ">
+            <div class="card-header text-white bg-info">
+                Créer une Sortie
+            </div>
 
-    <div class="card-body">
         {{ form_start(sortieForm) }}
-
         <!-- ligne 1-->
-        <div class="form-row col-12 d-flex justify-content-around">
+        <div class="row">
             <div class = "col-md-5 mb-3">
-                <label for="{{ field_name(sortieForm.nom) }}"> Nom de la sortie </label>
-                <input type="text"
-                       id="{{ field_name(sortieForm.nom) }}"
-                       name="{{ field_name(sortieForm.nom) }}"
-                       value="{{ field_name(sortieForm.nom) }}"
-                       placeholder="{{ field_name(sortieForm.nom) }}"
-                       class="form-control"
-                       >
+                {{ form_row(sortieForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom de la sortie'}}) }}
             </div>
 
             <div class = "col-md-5 mb-3">
-                {{ form_label(sortieForm.Campus ) }}
-                {{ form_widget(sortieForm.Campus, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
+                {{ form_row(sortieForm.Campus, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
             </div>
         </div>
 
+    <div class="row">
         <!-- ligne 2-->
 
-        <div class="form-row col-12 d-flex justify-content-around">
             <div class = "col-md-5 mb-3">
-                <label for="{{ field_name(sortieForm.dateHeureDebut) }}"> Date et heure de la sortie : </label>
-                <input type="datetime-local"
-                       id="{{ field_name(sortieForm.dateHeureDebut) }}"
-                       name="{{ field_name(sortieForm.dateHeureDebut) }}"
-                       value="{{ field_name(sortieForm.dateHeureDebut) }}"
-                >
+                {{ form_row(sortieForm.dateHeureDebut, {'attr': {'type': 'datetime-local'}}) }}
+
             </div>
 
             <div class = "col-md-5 mb-3 ">
-                {{ form_label(sortieForm.Lieu )}}
-                {{ form_widget(sortieForm.Lieu, {'attr': {
-                    'class':"form-select",
-                    'aria-label':"Default select example",
-                    'width':'fit',
-                    'onchange':"getComboA(this)"
 
-                }}) }}
             </div>
-        </div>
+    </div>
 
-        <!-- ligne 3-->
-        <div class="form-row col-12 d-flex justify-content-around">
-            <div class = "col-md-5 mb-3">
-                <label for="{{ field_name(sortieForm.dateLimiteInscription) }}"> Date limite d'inscription : </label>
-                <input type="datetime-local"
-                       id="{{ field_name(sortieForm.dateLimiteInscription) }}"
-                       name="{{ field_name(sortieForm.dateLimiteInscription) }}"
-                       value="{{ field_name(sortieForm.dateLimiteInscription) }}">
+            <!-- ligne 3-->
+            <div class="row">
+
+                <div class = "col-md-5 mb-3">
+                    {{ form_row(sortieForm.dateLimiteInscription)}}
+
+
+                <div class = "col-md-5 mb-3">
+                    {{ form_row(sortieForm.Lieu, {'attr': {'class':"form-select", 'aria-label':"Default select example",'width':'fit','onchange':"getComboA(this)"}}) }}
+                </div>
+
             </div>
-
-            <div class = "col-md-5 mb-3">
-            </div>
-        </div>
-
 
         <!-- ligne 4-->
-        <div class="form-row col-12 d-flex justify-content-around">
-            <div class = "col-md-5 mb-3">
-                <label for="{{ field_name(sortieForm.nbInscriptionMax) }}"> Nombre de places : </label>
-                <input type="number"
-                       id="{{ field_name(sortieForm.nbInscriptionMax) }}"
-                       name="{{ field_name(sortieForm.nbInscriptionMax) }}"
-                       value="{{ field_name(sortieForm.nbInscriptionMax) }}"
-                       class="form-control">
-            </div>
-            <div class = "col-md-5 mb-3">
-            </div>
-        </div>
+
+                <div class="row">
+                    <div class = "col-md-5 mb-3">
+                        {{ form_row(sortieForm.nbInscriptionMax, {'attr': {'class': 'form-control', 'type': 'number'}}) }}
+                    </div>
+                    <div class = "col-md-5 mb-3">
+                        {{ form_row(sortieForm.Rue, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
 
 
         <!-- ligne 5-->
-        <div class="form-row col-12 d-flex justify-content-around">
-            <div class = "col-md-5 mb-3">
-                <label for="{{ field_name(sortieForm.duree) }}"> Durée : </label>
-                <input type="number"
-                       id="{{ field_name(sortieForm.duree) }}"
-                       name="{{ field_name(sortieForm.duree) }}"
-                       value="{{ field_name(sortieForm.duree) }}"
-                        class="form-control">
-            </div>
+            <div class="row">
+                <div class = "col-md-5 mb-3">
+                    {{ form_row(sortieForm.duree, {'attr': {'class': 'form-control'}}) }}
+                </div>
 
-            <div class = "col-md-5 mb-3">
-                {{ form_label(sortieForm.Rue )}}
-                {{ form_widget(sortieForm.Rue, {'attr': {
-                    'class':"form-control",
-
-                }}) }}
+                <div class = "col-md-5 mb-3">
+                    {{ form_row(sortieForm.CodePostal, {'attr': {'class':"form-control",}}) }}
+                </div>
             </div>
-        </div>
 
 
         <!-- ligne 6-->
-        <div class="form-row col-12 d-flex justify-content-around">
+
             <div class = "col-md-5 mb-3">
-                <label for="{{ field_name(sortieForm.infosSortie) }}"> Description : </label>
-                <input type="textarea"
-                       id="{{ field_name(sortieForm.infosSortie) }}"
-                       name="{{ field_name(sortieForm.infosSortie) }}"
-                       value="Votre texte"
-                       class="form-control">
+                {{ form_row(sortieForm.infosSortie, {'attr': {'class': 'form-control', 'placeholder': 'Votre texte'}}) }}
             </div>
 
             <div class = "col-md-5 mb-3">
 
                 <div>
-                    {{ form_label(sortieForm.CodePostal )}}
-                    {{ form_widget(sortieForm.CodePostal, {'attr': {
-                        'class':"form-control",
-
-                    }}) }}
-                </div>
-
-
-
-                <div>
-                    {{ form_label(sortieForm.Latitude )}}
-                    {{ form_widget(sortieForm.Latitude, {'attr': {
-                        'class':"form-control",
-
-                    }}) }}
+                    {{ form_row(sortieForm.Latitude, {'attr': {'class':"form-control"}}) }}
                 </div>
                 <div>
-                    {{ form_label(sortieForm.Longitude )}}
-                    {{ form_widget(sortieForm.Longitude, {'attr': {
-                        'class':"form-control",
-
-                    }}) }}
+                    {{ form_row(sortieForm.Longitude, {'attr': {'class':"form-control",}}) }}
                 </div>
             </div>
         </div>
@@ -165,14 +106,10 @@
                     {{ form_widget(sortieForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
                 </a>
             </div >
-
         </div>
+            {{ form_end(sortieForm) }}
+    </div>
 
-        {{ form_end(sortieForm) }}
-
-
-        </div>
-</div>
     <script>
         //
         function getComboA(selectObject){
@@ -191,10 +128,7 @@
 
                 });
 
-
-
         }
-
     </script>
 
 {% endblock %}

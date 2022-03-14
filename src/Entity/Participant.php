@@ -27,7 +27,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      *     minMessage="Trop court. Au moins 3 caractères.",
      *     maxMessage="Trop long. Maximum 50 caractères.")
      * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux dans le champ
-     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/",
+     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/",htmlPattern="/.+/",
      *     message="Le nom ne doit pas contenir de caractères spéciaux")
      * @ORM\Column(type="string", length=50)
      */
@@ -38,7 +38,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      *     minMessage="Trop court. Au moins 2 caractères.",
      *     maxMessage="Trop long. Maximum 50 caractères.")
      * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux dans le champ
-     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/",
+     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/", htmlPattern="/.+/",
      *     message="Le prenom ne doit pas contenir de caractères spéciaux")
      * @ORM\Column(type="string", length=50)
      */
@@ -49,7 +49,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      *     minMessage="Le numéro de téléphone doit être composé de 10 numéro",
      *     maxMessage="Le numéro de téléphone doit être composé de 10 numéro")
      * Ceci est un pattern qui oblige l'utilisateur à inscrire que des chiffres(10) avec la possibilités d'utilisé l'indicatifs téléphoniques
-     * @Assert\Regex(pattern="/(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/")
+     * @Assert\Regex(pattern="/(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/", htmlPattern="/.+/",
+     *     message="Saisir un numéro de téléphone")
      * @ORM\Column(type="string", length=50)
      */
     private $telephone;
@@ -58,8 +59,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Length(min="10", max="180",
      *     minMessage="Trop court. Au moins 10 caractères.",
      *     maxMessage="Trop long. Maximum 180 caractères.")
-     * @Assert\Regex(pattern="/.+\@.+\..+/",
-     *     message="Format requis : exemple@exemple.com")
+     * @Assert\Regex(pattern="/.+\@.+\..+/", htmlPattern="/.+/",
+     *     message="Format requis pour l'email : exemple@exemple.com")
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -95,8 +96,9 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Length(min="5", max="100",
      *     minMessage="Le pseudo doit être composé de 5 caractères au minimum",
      *     maxMessage="Le numéro de téléphone doit être composé de 100 caractères au maximum")
-     * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux sauf "-" "_" seulement si ils ne sont ni au début ni à la fin du pseudo
-     * @Assert\Regex(pattern="/(?=.{3,20}$)(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9_-]+([^._-])$/")
+     * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux sauf - _ seulement si ils ne sont ni au début ni à la fin du pseudo
+     * @Assert\Regex(pattern="/(?=.{3,20}$)(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9_-]+([^._-])$/", htmlPattern="/.+/",
+     *     message="Les caractères ne sont pas autorisés dans le pseudo sauf les - et _ si ils ne sont pas au début ou à la fin du pseudo")
      * @ORM\Column(type="string", length=100)
      */
     private $pseudo;

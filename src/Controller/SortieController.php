@@ -222,5 +222,20 @@ use Symfony\Component\Routing\Annotation\Route;
             ]);
         }
 
+        /**
+         * @Route("/profil/{id}", name="monProfil")
+         */
+        public function profil($id, Participant $participant, ParticipantRepository $partRepo, Request $req): Response
+        {
+            $user = $partRepo->find($id);
 
+            $formUser = $this->createForm(SortieType::class);
+            $formUser->handleRequest($req);
+
+
+
+            return $this->render('sortie/monProfil.html.twig', [
+                'formUser' => $formUser->createView()
+            ]);
+        }
     }

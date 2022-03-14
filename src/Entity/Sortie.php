@@ -27,7 +27,7 @@ class Sortie
      *     minMessage="Trop court. Au moins 3 caractères.",
      *     maxMessage="Trop long. Maximum 100 caractères.")
      * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux dans le champ
-     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/",
+     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/", htmlPattern="/.+/",
      *     message="Le nom de la sortie ne doit pas contenir de caractères spéciaux")
      * @ORM\Column(type="string", length=100)
      */
@@ -82,6 +82,7 @@ class Sortie
     private $Lieu;
 
     /**
+     *
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
      * @ORM\JoinColumn(nullable=false)
      */
