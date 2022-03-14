@@ -22,8 +22,8 @@
                 <input type="text"
                        id="{{ field_name(sortieForm.nom) }}"
                        name="{{ field_name(sortieForm.nom) }}"
-                       value="{{ field_name(sortieForm.nom) }}"
-                       placeholder="{{ field_name(sortieForm.nom) }}"
+                       value=""
+                       placeholder=""
                        class="form-control"
                        >
             </div>
@@ -47,12 +47,9 @@
             </div>
 
             <div class = "col-md-5 mb-3 ">
-                {{ form_label(sortieForm.Lieu )}}
-                {{ form_widget(sortieForm.Lieu, {'attr': {
+                {{ form_label(sortieForm.Ville )}}
+                {{ form_widget(sortieForm.Ville, {'attr': {
                     'class':"form-select",
-                    'aria-label':"Default select example",
-                    'width':'fit',
-                    'onchange':"getComboA(this)"
 
                 }}) }}
             </div>
@@ -84,6 +81,15 @@
                        class="form-control">
             </div>
             <div class = "col-md-5 mb-3">
+                {{ form_label(sortieForm.Lieu )}}
+                {{ form_widget(sortieForm.Lieu, {'attr': {
+                    'class':"form-select",
+                    'aria-label':"Default select example",
+                    'width':'fit',
+                    'onchange':"getComboA(this)"
+
+                }}) }}
+
             </div>
         </div>
 
@@ -112,12 +118,11 @@
         <!-- ligne 6-->
         <div class="form-row col-12 d-flex justify-content-around">
             <div class = "col-md-5 mb-3">
-                <label for="{{ field_name(sortieForm.infosSortie) }}"> Description : </label>
-                <input type="textarea"
-                       id="{{ field_name(sortieForm.infosSortie) }}"
-                       name="{{ field_name(sortieForm.infosSortie) }}"
-                       value="Votre texte"
-                       class="form-control">
+                {{ form_label(sortieForm.infosSortie )}}
+                {{ form_widget(sortieForm.infosSortie, {'attr': {
+                    'class':"form-control",
+
+                }}) }}
             </div>
 
             <div class = "col-md-5 mb-3">
@@ -183,11 +188,12 @@
             fetch(url)
                 .then(reponse => reponse.json())
                 .then(tableau => {
-                    console.log(tableau)
-                    document.getElementById("sortie_Rue").value = "tableau.rue";
+                    document.getElementById("sortie_Rue").value = tableau.rue;
                     document.getElementById("sortie_CodePostal").value = tableau.ville.codePostal;
                     document.getElementById("sortie_Latitude").value = tableau.latitude;
                     document.getElementById("sortie_Longitude").value = tableau.longitude;
+                    document.getElementById("sortie_Ville").value = tableau.ville.id;
+
 
                 });
 
