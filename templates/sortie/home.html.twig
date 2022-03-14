@@ -17,7 +17,8 @@
                             {
                                 'class':"form-select",
                                 'aria-label':"Default select example",
-                                'width':'fit'
+                                'width':'fit',
+                                'onchange':"getComboA(this)"
                             }}) }}
                     </div>
 
@@ -148,4 +149,20 @@
             <button type="button" class="btn btn-secondary btn-lg my-sm-5 mx-4" name="search">Créer une sortie</button>
         </a>
     </div>
+
+
+
+    <script>
+
+        function getComboA(selectObject){
+            const test2 = document.getElementById('home_Campus').getElementsByClassName('')
+            var value = selectObject.value
+            console.log('coucou')
+            console.log(value)
+
+        }
+
+    </script>
+
+
 {% endblock %}

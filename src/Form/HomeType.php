@@ -38,10 +38,27 @@ class HomeType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('sortieOrganisees', CheckboxType::class)
-            ->add('sortieInscrit',CheckboxType::class)
-            ->add('sortieNonInscrit',CheckboxType::class)
-            ->add('sortiePass', CheckboxType::class)
+            ->add('sortieOrganisees', CheckboxType::class, [
+
+                'required' => false
+
+            ])
+            ->add('sortieInscrit',CheckboxType::class,
+                [
+
+                    'required' => false
+
+                ])
+            ->add('sortieNonInscrit',CheckboxType::class,  [
+
+                'required' => false
+
+            ])
+            ->add('sortiePass', CheckboxType::class, [
+
+                'required' => false
+
+            ])
             ->add('Enregistrer', SubmitType::class)
         ;
     }
