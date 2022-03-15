@@ -8,10 +8,9 @@ use App\Entity\Lieu;
 
 use App\Entity\Ville;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Button;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +22,7 @@ class SortieType extends AbstractType
     {
 
         $builder
-            ->add('nom', [
+            ->add('nom', TextType::class,[
                 'label' => 'Nom :'
                 ])
 
@@ -42,13 +41,13 @@ class SortieType extends AbstractType
                 'input' => 'datetime',
                 'input_format' => 'Y-m-d H:i:s'
             ])
-            ->add('nbInscriptionMax', [
+            ->add('nbInscriptionMax', IntegerType::class,[
                 'label' => 'Nombre de places : '
             ])
-            ->add('duree', [
+            ->add('duree', IntegerType::class,[
                 'label' => 'Durée : '
             ])
-            ->add('infosSortie',[
+            ->add('infosSortie', TextType::class,[
                 'label' => 'Description et information : '
             ])
             ->add('Campus', EntityType::class, [
