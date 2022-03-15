@@ -7,6 +7,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
+
+/**
+ *TODO page pour externaliser la méthode de chargement de l'image hors du controller (si temps dispo).
+ */
+
 class FileUploader
 {
     private $targetDirectory;

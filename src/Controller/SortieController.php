@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
-use App\Form\AnnulerType;
+use App\Form\AnnulerModele;
+use App\Form\AnnulerModeleType;
+
 use App\Form\SortieType;
 use App\Form\UpdateSortieType;
 use App\Repository\EtatRepository;
@@ -167,8 +169,10 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function annulerLaSortie(Sortie $sortie,SortieRepository $repo,Request $requestA, EtatRepository $etatrepo, EntityManagerInterface $em): Response
         {
+            $annulerModele = new AnnulerModele();
+
             //je crée mon form avc les parametres dans la classe annulerType
-            $annuleForm = $this->createForm(AnnulerType::class);
+            $annuleForm = $this->createForm(AnnulerModeleType::class , $annulerModele);
             $annuleForm->handleRequest($requestA);
 
             if ($annuleForm->isSubmitted() && $annuleForm->isValid()) {
@@ -180,21 +184,22 @@ use Symfony\Component\Routing\Annotation\Route;
                     $etat = $etatrepo->findOneBy(['libelle' => 'Annulée']);
                     $sortie->setEtat($etat);
 
-                    /**
-                     * TODO $motif
-                     */
 
-                    $em->persist($sortie);
+                    //je récupère la description et je concatène avec le motif dans l'update infoSortie
+                    $sortie->setInfosSortie($sortie->getInfosSortie()." Motif :".$annulerModele->getMotif());
+
+
                     $em->flush();
+
                     //redirection vers la page d'accueil
-                    return $this->redirectToRoute('sortiehome');
+                    return $this->redirectToRoute('home');
                 }
 
                 //si le bouton Annuler est cliqué
                 if ($annuleForm->get('Annuler')->isClicked()) {
 
                     //redirection vers la page d'accueil
-                    return $this->redirectToRoute('sortiehome');
+                    return $this->redirectToRoute('home');
 
                 }
             }
