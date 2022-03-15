@@ -41,7 +41,6 @@ class PersonneController extends AbstractController
                 $em->persist($participant);
                 $em->flush();
 
-                dump('profilModifier');
 
             if ($imageDoss) {
                 $nomFichier = pathinfo($imageDoss->getClientOriginalName(), PATHINFO_FILENAME);
@@ -59,8 +58,7 @@ class PersonneController extends AbstractController
                 $em->persist($participant);
                $em->flush();
             }
-
-//            return $this->render('sortie/monProfil.html.twig');
+            
 
         }
 
