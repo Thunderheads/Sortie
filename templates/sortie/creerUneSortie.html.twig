@@ -5,130 +5,160 @@
 
 
 {% block body %}
-    <div class ="container-fluid">
+    <div class="container-fluid">
         <div class="card ">
-            <div class="card-header text-white bg-info">
+            <div class="card-header text-white bg-info mb-4">
                 Créer une Sortie
             </div>
 
-        {{ form_start(sortieForm) }}
-        <!-- ligne 1-->
-        <div class="row">
-            <div class = "col-md-5 mb-3">
-                {{ form_row(sortieForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom de la sortie'}}) }}
+            {{ form_start(sortieForm) }}
+            <!-- ligne 1-->
+            <div class="row justify-content-around">
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom de la sortie'}}) }}
+                </div>
+
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.Campus, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
+                </div>
             </div>
 
-            <div class = "col-md-5 mb-3">
-                {{ form_row(sortieForm.Campus, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
+            <div class="row justify-content-around">
+                <!-- ligne 2-->
+
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.dateHeureDebut, {'attr': {'type': 'datetime-local'}}) }}
+
+                </div>
+
+                <div class="col-md-5 mb-3 ">
+                    {{ form_row(sortieForm.Ville, {'attr': {'class': 'form-select', 'onchange': 'getComboB(this)'}}) }}
+                </div>
             </div>
-        </div>
-
-    <div class="row">
-        <!-- ligne 2-->
-
-            <div class = "col-md-5 mb-3">
-                {{ form_row(sortieForm.dateHeureDebut, {'attr': {'type': 'datetime-local'}}) }}
-
-            </div>
-
-            <div class = "col-md-5 mb-3 ">
-
-            </div>
-    </div>
 
             <!-- ligne 3-->
-            <div class="row">
+            <div class="row justify-content-around">
 
-                <div class = "col-md-5 mb-3">
-                    {{ form_row(sortieForm.dateLimiteInscription)}}
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.dateLimiteInscription) }}
+                </div>
 
-
-                <div class = "col-md-5 mb-3">
+                <div class="col-md-5 mb-3">
                     {{ form_row(sortieForm.Lieu, {'attr': {'class':"form-select", 'aria-label':"Default select example",'width':'fit','onchange':"getComboA(this)"}}) }}
                 </div>
-
             </div>
 
-        <!-- ligne 4-->
+            <!-- ligne 4-->
 
-                <div class="row">
-                    <div class = "col-md-5 mb-3">
-                        {{ form_row(sortieForm.nbInscriptionMax, {'attr': {'class': 'form-control', 'type': 'number'}}) }}
-                    </div>
-                    <div class = "col-md-5 mb-3">
-                        {{ form_row(sortieForm.Rue, {'attr': {'class': 'form-control'}}) }}
-                    </div>
+            <div class="row justify-content-around">
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.nbInscriptionMax, {'attr': {'class': 'form-control', 'type': 'number'}}) }}
                 </div>
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.Rue, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
 
 
-        <!-- ligne 5-->
-            <div class="row">
-                <div class = "col-md-5 mb-3">
+            <!-- ligne 5-->
+            <div class="row justify-content-around">
+                <div class="col-md-5 mb-3">
                     {{ form_row(sortieForm.duree, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
-                <div class = "col-md-5 mb-3">
+                <div class="col-md-5 mb-3">
                     {{ form_row(sortieForm.CodePostal, {'attr': {'class':"form-control",}}) }}
                 </div>
             </div>
 
 
-        <!-- ligne 6-->
+            <!-- ligne 6-->
+            <div class="row justify-content-around">
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.infosSortie, {'attr': {'class': 'form-control', 'placeholder': 'Votre texte'}}) }}
+                </div>
 
-            <div class = "col-md-5 mb-3">
-                {{ form_row(sortieForm.infosSortie, {'attr': {'class': 'form-control', 'placeholder': 'Votre texte'}}) }}
+                <div class="col-md-5 mb-3">
+
+                    <div class="row">
+                        {{ form_row(sortieForm.Latitude, {'attr': {'class':"form-control"}}) }}
+                    </div>
+                    <div class="row">
+                        {{ form_row(sortieForm.Longitude, {'attr': {'class':"form-control",}}) }}
+                    </div>
+                </div>
             </div>
 
-            <div class = "col-md-5 mb-3">
 
-                <div>
-                    {{ form_row(sortieForm.Latitude, {'attr': {'class':"form-control"}}) }}
+            <!-- ligne des boutons -->
+
+            <div class="form-row col-12 d-flex justify-content-center mt-3">
+                <div class="col-2">
+                    {{ form_widget(sortieForm.Enregistrer, {'attr': {'class':'btn btn-primary'}}) }}
+                </div>
+                <div class="col-2">
+                    {{ form_widget(sortieForm.Publier, {'attr': {'class':'btn btn-primary'}}) }}
                 </div>
                 <div>
-                    {{ form_row(sortieForm.Longitude, {'attr': {'class':"form-control",}}) }}
+                    <a href="{{ asset('home') }}">
+                        {{ form_widget(sortieForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
+                    </a>
                 </div>
             </div>
-        </div>
-
-
-
-        <!-- ligne des boutons -->
-
-        <div class="form-row col-12 d-flex justify-content-center mt-3">
-            <div class="col-2">
-                {{ form_widget(sortieForm.Enregistrer, {'attr': {'class':'btn btn-primary'}}) }}
-            </div>
-            <div class="col-2">
-                {{ form_widget(sortieForm.Publier, {'attr': {'class':'btn btn-primary'}}) }}
-            </div >
-            <div>
-                <a href="{{ asset('home') }}">
-                    {{ form_widget(sortieForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
-                </a>
-            </div >
-        </div>
             {{ form_end(sortieForm) }}
+        </div>
     </div>
 
-    <script>
-        //
-        function getComboA(selectObject){
-            const value = selectObject.value
+        <script>
+            //ville
+            function getComboB(selectObject){
+                const value = selectObject.value
+                let url = "ville/" + value;
+                fetch(url)
+                    .then(reponse => reponse.json())
+                    .then(tableau => {
+                        document.getElementById('sortie_Lieu').options.length=0;
+                        console.log(tableau.lieus.length)
+                        for(i=0; i<= tableau.lieus.length ; i++ ){
+                            if(tableau.lieus.length == 0){
+                                document.getElementById("sortie_Rue").value = "";
+                                document.getElementById("sortie_CodePostal").value = "";
+                                document.getElementById("sortie_Latitude").value = "";
+                                document.getElementById("sortie_Longitude").value = "";
+                            } else {
+                                let p = document.createElement("option")
+                                p.setAttribute("value", tableau.lieus[i].id)
+                                p.innerText = tableau.lieus[i].nom
+                                document.getElementById('sortie_Lieu').appendChild(p)
+                                if (i === 0 && tableau.lieus.length > 0) {
+                                    document.getElementById("sortie_Rue").value = tableau.lieus[0].rue;
+                                    document.getElementById("sortie_CodePostal").value = tableau.codePostal;
+                                    document.getElementById("sortie_Latitude").value = tableau.lieus[0].latitude;
+                                    document.getElementById("sortie_Longitude").value = tableau.lieus[0].longitude;
+                                }
+                            }
+                        }
+                    });
+            }
+            //
+            function getComboA(selectObject) {
+                const value = selectObject.value
 
-            let url = "http://localhost/paricilasortie/public/lieu/"+value;
+                let url = "http://localhost/paricilasortie/public/lieu/" + value;
 
-            fetch(url)
-                .then(reponse => reponse.json())
-                .then(tableau => {
-                    console.log(tableau)
-                    document.getElementById("sortie_Rue").value = "tableau.rue";
-                    document.getElementById("sortie_CodePostal").value = tableau.ville.codePostal;
-                    document.getElementById("sortie_Latitude").value = tableau.latitude;
-                    document.getElementById("sortie_Longitude").value = tableau.longitude;
+                fetch(url)
+                    .then(reponse => reponse.json())
+                    .then(tableau => {
+                        console.log(tableau)
+                        document.getElementById("sortie_Rue").value = tableau.rue;
+                        document.getElementById("sortie_CodePostal").value = tableau.ville.codePostal;
+                        document.getElementById("sortie_Latitude").value = tableau.latitude;
+                        document.getElementById("sortie_Longitude").value = tableau.longitude;
+                        document.getElementById("sortie_Ville").value = tableau.ville.id;
 
-                });
+                    });
 
-        }
-    </script>
+            }
+        </script>
 
 {% endblock %}

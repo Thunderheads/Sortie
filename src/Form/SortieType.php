@@ -23,32 +23,41 @@ class SortieType extends AbstractType
     {
 
         $builder
-            ->add('nom')
+            ->add('nom', [
+                'label' => 'Nom :'
+                ])
 
             //utiliser le datetime pour avoir le temps en minute
             ->add('dateHeureDebut', DateTimeType::class, [
-                'label' => 'dateHeureDebut',
+                'label' => 'Date et heure du début : ',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
             ])
             ->add('dateLimiteInscription', DateTimeType::class, [
-                'label' => 'dateLimiteInscription ',
+                'label' => 'Date limite d\'inscription : ',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
                 'input' => 'datetime',
                 'input_format' => 'Y-m-d H:i:s'
             ])
-            ->add('nbInscriptionMax')
-            ->add('duree')
-            ->add('infosSortie')
+            ->add('nbInscriptionMax', [
+                'label' => 'Nombre de places : '
+            ])
+            ->add('duree', [
+                'label' => 'Durée : '
+            ])
+            ->add('infosSortie',[
+                'label' => 'Description et information : '
+            ])
             ->add('Campus', EntityType::class, [
                 // looks for choices from this entity
                 'class' => Campus::class,
                 // uses the User.username property as the visible option string
                 'choice_label' => 'nom',
-                'placeholder' => 'choisir un campus'
+                'placeholder' => 'choisir un campus',
+                'label' => 'Campus : '
             ])
 
 
@@ -58,25 +67,17 @@ class SortieType extends AbstractType
                 "mapped" => false,
                 // uses the User.username property as the visible option string
                 'choice_label' => 'nom',
-                'placeholder' => 'choisir une ville'
+                'placeholder' => 'choisir une ville',
+                'label' => 'Ville : '
             ])
 
-
-            ->add('Ville', EntityType::class, [
-                // looks for choices from this entity
-                'class' => Ville::class,
-                "mapped"=>false,
-                // uses the User.username property as the visible option string
-                'choice_label' => 'nom',
-                'placeholder' => 'choisir une ville'
-
-            ])
             ->add('Lieu', EntityType::class, [
                 // looks for choices from this entity
                 'class' => Lieu::class,
                 // uses the User.username property as the visible option string
                 'choice_label' => 'nom',
-                'placeholder' => 'choisir un lieu'
+                'placeholder' => 'choisir un lieu',
+                'label' => 'Lieu : '
             ])
 
             ->add('Rue', null, ["mapped" => false])
