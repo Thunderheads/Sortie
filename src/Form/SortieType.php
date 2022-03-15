@@ -21,65 +21,77 @@ class SortieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
-            ->add('nom')
+            ->add('nom', [
+                'label' => 'Nom :'
+                ])
 
             //utiliser le datetime pour avoir le temps en minute
             ->add('dateHeureDebut', DateTimeType::class, [
-                'label' => 'dateHeureDebut',
+                'label' => 'Date et heure du début : ',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('dateLimiteInscription',DateTimeType::class, [
-                'label' => 'dateLimiteInscription ',
+            ->add('dateLimiteInscription', DateTimeType::class, [
+                'label' => 'Date limite d\'inscription : ',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
-                'input'=> 'datetime',
-                'input_format'=>'Y-m-d H:i:s'
+                'input' => 'datetime',
+                'input_format' => 'Y-m-d H:i:s'
             ])
-            ->add('nbInscriptionMax')
-            ->add('duree')
-            ->add('infosSortie')
-            ->add('Campus',  EntityType::class, [
+            ->add('nbInscriptionMax', [
+                'label' => 'Nombre de places : '
+            ])
+            ->add('duree', [
+                'label' => 'Durée : '
+            ])
+            ->add('infosSortie',[
+                'label' => 'Description et information : '
+            ])
+            ->add('Campus', EntityType::class, [
                 // looks for choices from this entity
                 'class' => Campus::class,
                 // uses the User.username property as the visible option string
                 'choice_label' => 'nom',
-                'placeholder' => 'choisir un campus'
-
+                'placeholder' => 'choisir un campus',
+                'label' => 'Campus : '
             ])
 
 
             ->add('Ville', EntityType::class, [
                 // looks for choices from this entity
                 'class' => Ville::class,
-                "mapped"=>false,
+                "mapped" => false,
                 // uses the User.username property as the visible option string
                 'choice_label' => 'nom',
-                'placeholder' => 'choisir une ville'
-
+                'placeholder' => 'choisir une ville',
+                'label' => 'Ville : '
             ])
+
             ->add('Lieu', EntityType::class, [
-            // looks for choices from this entity
-            'class' => Lieu::class,
-            // uses the User.username property as the visible option string
-            'choice_label' => 'nom',
-                'placeholder' => 'choisir un lieu'
+                // looks for choices from this entity
+                'class' => Lieu::class,
+                // uses the User.username property as the visible option string
+                'choice_label' => 'nom',
+                'placeholder' => 'choisir un lieu',
+                'label' => 'Lieu : '
+            ])
 
-    ])
-
-            ->add('Rue', null, ["mapped"=>false])
-            ->add('CodePostal', null, ["mapped"=>false])
-            ->add('Latitude', null, ["mapped"=>false])
-            ->add('Longitude', null, ["mapped"=>false])
+            ->add('Rue', null, ["mapped" => false])
+            ->add('CodePostal', null, ["mapped" => false])
+            ->add('Latitude', null, ["mapped" => false])
+            ->add('Longitude', null, ["mapped" => false])
             // pour que les boutons soient de type submit
             ->add('Enregistrer', SubmitType::class)
             ->add('Publier', SubmitType::class)
-            ->add('Annuler', ButtonType::class)
-        ;
+            ->add('Annuler', ButtonType::class);
     }
+
+
+
 
 
     // ici se fait le lien avec la classe sortie
