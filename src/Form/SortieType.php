@@ -62,10 +62,10 @@ class SortieType extends AbstractType
 
             ])
             ->add('Lieu', EntityType::class, [
-        // looks for choices from this entity
-        'class' => Lieu::class,
-        // uses the User.username property as the visible option string
-        'choice_label' => 'nom',
+            // looks for choices from this entity
+            'class' => Lieu::class,
+            // uses the User.username property as the visible option string
+            'choice_label' => 'nom',
                 'placeholder' => 'choisir un lieu'
 
     ])

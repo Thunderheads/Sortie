@@ -18,34 +18,40 @@ class Lieu
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("ville")
      */
     private $id;
 
     /**
+     * @Groups("ville")
      * @Groups("lieux")
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
+     * @Groups("ville")
      * @Groups("lieux")
      * @ORM\Column(type="string", length=150)
      */
     private $rue;
 
     /**
+     * @Groups("ville")
      * @Groups("lieux")
      * @ORM\Column(type="float", nullable=true)
      */
     private $latitude;
 
     /**
+     * @Groups("ville")
      * @Groups("lieux")
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
 
     /**
+     * @Groups("ville")
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="Lieu")
      *
      */

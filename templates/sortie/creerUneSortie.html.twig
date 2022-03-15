@@ -50,6 +50,7 @@
                 {{ form_label(sortieForm.Ville )}}
                 {{ form_widget(sortieForm.Ville, {'attr': {
                     'class':"form-select",
+                    'onchange':'getComboB(this)'
 
                 }}) }}
             </div>
@@ -89,6 +90,7 @@
                     'onchange':"getComboA(this)"
 
                 }}) }}
+
 
             </div>
         </div>
@@ -179,11 +181,13 @@
         </div>
 </div>
     <script>
-        //
+
+        //lieu
         function getComboA(selectObject){
             const value = selectObject.value
 
-            let url = "http://localhost/paricilasortie/public/lieu/"+value;
+            //permet d'etre independant du projet
+            let url = "lieu/" + value;
 
             fetch(url)
                 .then(reponse => reponse.json())
@@ -197,9 +201,53 @@
 
                 });
 
+        }
 
+
+        //ville
+        function getComboB(selectObject){
+            const value = selectObject.value
+
+
+            let url = "ville/" + value;
+
+            fetch(url)
+                .then(reponse => reponse.json())
+                .then(tableau => {
+                    document.getElementById('sortie_Lieu').options.length=0;
+                    console.log(tableau.lieus.length)
+                    for(i=0; i<= tableau.lieus.length ; i++ ){
+
+                        if(tableau.lieus.length == 0){
+                            document.getElementById("sortie_Rue").value = "";
+                            document.getElementById("sortie_CodePostal").value = "";
+                            document.getElementById("sortie_Latitude").value = "";
+                            document.getElementById("sortie_Longitude").value = "";
+
+                        } else {
+                            var p = document.createElement("option")
+                            p.setAttribute("value", tableau.lieus[i].id)
+                            p.innerText = tableau.lieus[i].nom
+                            document.getElementById('sortie_Lieu').appendChild(p)
+
+                            if (i === 0 && tableau.lieus.length > 0) {
+
+                                document.getElementById("sortie_Rue").value = tableau.lieus[0].rue;
+                                document.getElementById("sortie_CodePostal").value = tableau.codePostal;
+                                document.getElementById("sortie_Latitude").value = tableau.lieus[0].latitude;
+                                document.getElementById("sortie_Longitude").value = tableau.lieus[0].longitude;
+
+                            }
+                        }
+
+
+                    }
+
+                });
 
         }
+
+
 
     </script>
 
