@@ -23,11 +23,11 @@
                 </div>
             </div>
 
+            <!-- ligne 2-->
             <div class="row justify-content-around">
-                <!-- ligne 2-->
 
                 <div class="col-md-5 mb-3">
-                    {{ form_row(sortieForm.dateHeureDebut, {'attr': {'type': 'datetime-local'}}) }}
+                    {{ form_row(sortieForm.dateHeureDebut) }}
 
                 </div>
 
@@ -84,7 +84,7 @@
                         {{ form_row(sortieForm.Latitude, {'attr': {'class':"form-control"}}) }}
                     </div>
                     <div class="row">
-                        {{ form_row(sortieForm.Longitude, {'attr': {'class':"form-control",}}) }}
+                        {{ form_row(sortieForm.Longitude, {'attr': {'class':"form-control"}}) }}
                     </div>
                 </div>
             </div>

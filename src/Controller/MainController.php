@@ -21,9 +21,7 @@ class MainController extends AbstractController
      */
     public function base(): Response
     {
-        return $this->render('base.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        return $this->redirectToRoute('app_login');
     }
 
 
