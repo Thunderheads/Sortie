@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Campus;
 use App\Entity\Participant;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -30,13 +31,13 @@ class UserType extends AbstractType
 
             ->add('email')
 
-            ->add('password', RepeatedType::class, array(
+            ->add('password', RepeatedType::class,[
                 'mapped'=> false,
                 'required'=>false,
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'password'),
-                'second_options' => array('label' => 'confirmation'),
-            ))
+                'first_options'  => ['label' => 'Mot de passe : '],
+                'second_options' => ['label' => 'Confirmation : '],
+            ])
 
             ->add('Campus', EntityType::class, [
                 // looks for choices from this entity
@@ -46,7 +47,7 @@ class UserType extends AbstractType
             ])
 
             ->add('image', FileType::class, [
-                'label'=> 'Image(jpeg)',
+                'label'=> 'Image(.jpeg) :',
                 'mapped'=>false,
                 'required'=>false,
                 'constraints' => [

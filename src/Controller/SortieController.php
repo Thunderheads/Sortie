@@ -21,17 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
     class SortieController extends AbstractController
     {
-        /**
-         * @Route("/", name="app_sortie")
-         */
-        public function index(): Response
-        {
-            return $this->render('sortie/index.html.twig', [
-                'controller_name' => 'SortieController',
-            ]);
-        }
-
-
 
         /**
          * @Route("/new/", name="creerUneSortie")
@@ -39,10 +28,6 @@ use Symfony\Component\Routing\Annotation\Route;
         public function creerUneSortie(Request $req, EntityManagerInterface $em, ParticipantRepository $participantRepository, EtatRepository $etatRepository): Response
         {
 
-            /**
-             * TODO modifier la creation pour prendre en compte le bon organisateur
-             * TODO si une personne arrive sur la page et qu'elle veut annuler elle doit pouvoir annuler sans remplir de champ
-             */
             //creation d'instance
             $sortie = new  Sortie();
             $sortieForm = $this->createForm(SortieType::class, $sortie);
@@ -52,8 +37,7 @@ use Symfony\Component\Routing\Annotation\Route;
             if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
                 //permet d'attribuer la sortie à un organisateur
-                $organisateur = $participantRepository->find(1);
-                $sortie->setOrganisateur($organisateur);
+                $sortie->setOrganisateur($this->getUser());
 
                 //si le bouton publier est cliqué
                 if($sortieForm->get('Publier')->isClicked()){
@@ -222,20 +206,4 @@ use Symfony\Component\Routing\Annotation\Route;
             ]);
         }
 
-        /**
-         * @Route("/profil/{id}", name="monProfil")
-         */
-        public function profil($id, Participant $participant, ParticipantRepository $partRepo, Request $req): Response
-        {
-            $user = $partRepo->find($id);
-
-            $formUser = $this->createForm(SortieType::class);
-            $formUser->handleRequest($req);
-
-
-
-            return $this->render('sortie/monProfil.html.twig', [
-                'formUser' => $formUser->createView()
-            ]);
-        }
     }
