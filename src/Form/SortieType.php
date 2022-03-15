@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Sortie;
 use App\Entity\Lieu;
 
+use App\Entity\Ville;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Button;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
@@ -47,6 +48,17 @@ class SortieType extends AbstractType
                 // uses the User.username property as the visible option string
                 'choice_label' => 'nom',
                 'placeholder' => 'choisir un campus'
+
+            ])
+
+
+            ->add('Ville', EntityType::class, [
+                // looks for choices from this entity
+                'class' => Ville::class,
+                "mapped"=>false,
+                // uses the User.username property as the visible option string
+                'choice_label' => 'nom',
+                'placeholder' => 'choisir une ville'
 
             ])
             ->add('Lieu', EntityType::class, [

@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Ignore;
 class Ville
 {
     /**
+     * @Groups("lieux")
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
