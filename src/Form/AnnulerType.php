@@ -18,8 +18,10 @@ class AnnulerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('infos', TextareaType::class, [
-                'label'=> false
+            ->add('infosSortie', TextareaType::class, [
+                'mapped'=> true,
+                'label'=> 'motif',
+                'required'=> false
             ])
             ->add('Enregistrer', SubmitType::class)
             ->add('Annuler', SubmitType::class);
