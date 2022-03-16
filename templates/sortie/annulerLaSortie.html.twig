@@ -22,7 +22,7 @@
     <p><b>Motif: </b></p>
     {{ form_start(annuleForm) }}
 
-   {{ form_row(annuleForm.infos) }}
+   {{ form_widget(annuleForm.motif) }}
 
     <div class="form-row col-12 d-flex justify-content-center mt-3">
         <div class="col-6">
@@ -30,8 +30,7 @@
         </div>
         <div class="col-6">
             {{ form_row(annuleForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
-            {{ form_end(annuleForm) }}
         </div>
     </div>
-
+    {{ form_end(annuleForm) }}
 {% endblock %}

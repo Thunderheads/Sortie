@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Etat;
-use App\Entity\Participant;
+
 use App\Entity\Sortie;
-use App\Form\AnnulerType;
+use App\Form\AnnulerModele;
+use App\Form\AnnulerModeleType;
+
 use App\Form\SortieType;
 use App\Form\UpdateSortieType;
 use App\Repository\EtatRepository;
@@ -21,27 +22,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
     class SortieController extends AbstractController
     {
-        /**
-         * @Route("/", name="app_sortie")
-         */
-        public function index(): Response
-        {
-            return $this->render('sortie/index.html.twig', [
-                'controller_name' => 'SortieController',
-            ]);
-        }
-
-
 
         /**
          * @Route("/new/", name="creerUneSortie")
          */
         public function creerUneSortie(Request $req, EntityManagerInterface $em, ParticipantRepository $participantRepository, EtatRepository $etatRepository): Response
         {
-            
-            /**
-             * TODO si une personne arrive sur la page et qu'elle veut annuler elle doit pouvoir annuler sans remplir de champ
-             */
+
+
             //creation d'instance
             $sortie = new  Sortie();
             $sortieForm = $this->createForm(SortieType::class, $sortie);
@@ -187,10 +175,10 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function annulerLaSortie(Sortie $sortie,SortieRepository $repo,Request $requestA, EtatRepository $etatrepo, EntityManagerInterface $em): Response
         {
-
+            $annulerModele = new AnnulerModele();
 
             //je crée mon form avc les parametres dans la classe annulerType
-            $annuleForm = $this->createForm(AnnulerType::class);
+            $annuleForm = $this->createForm(AnnulerModeleType::class , $annulerModele);
             $annuleForm->handleRequest($requestA);
 
             //empeche le user si il n'est pas l'organisateur
@@ -207,12 +195,13 @@ use Symfony\Component\Routing\Annotation\Route;
                     $etat = $etatrepo->findOneBy(['libelle' => 'Annulée']);
                     $sortie->setEtat($etat);
 
-                    /**
-                     * TODO $motif
-                     */
 
-                    $em->persist($sortie);
+                    //je récupère la description et je concatène avec le motif dans l'update infoSortie
+                    $sortie->setInfosSortie($sortie->getInfosSortie()." Motif :".$annulerModele->getMotif());
+
+
                     $em->flush();
+
                     //redirection vers la page d'accueil
                     return $this->redirectToRoute('home');
                 }
@@ -228,26 +217,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
             return $this->render('sortie/annulerLaSortie.html.twig', [
                 'sortie'=>$sortie,
-                'annuleForm'=>$annuleForm->createView(),
-
+                'annuleForm'=>$annuleForm->createView()
 
             ]);
         }
 
-        /**
-         * @Route("/profil/{id}", name="monProfil")
-         */
-        public function profil($id, Participant $participant, ParticipantRepository $partRepo, Request $req): Response
-        {
-            $user = $partRepo->find($id);
-
-            $formUser = $this->createForm(SortieType::class);
-            $formUser->handleRequest($req);
-
-
-
-            return $this->render('sortie/monProfil.html.twig', [
-                'formUser' => $formUser->createView()
-            ]);
-        }
     }

@@ -17,16 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-
     /**
      * @Route("/", name="base")
      */
     public function base(): Response
     {
-        return $this->render('base.html.twig', [
-            'controller_name' => 'MainController',
-            'user'=>$this->getUser()
-        ]);
+        return $this->redirectToRoute('app_login');
     }
 
 

@@ -21,29 +21,29 @@ class PersonneController extends AbstractController
 {
 
     /**
-     * @Route("/profil/{id}", name="monProfil")
+     * @Route("/profil", name="monProfil")
      */
-    public function profil(Participant $participant, ParticipantRepository $partRepo, Request $req, SluggerInterface $slugger, EntityManagerInterface $em, UserPasswordHasherInterface $passHach): Response
+    public function profil(ParticipantRepository $partRepo, Request $req, SluggerInterface $slugger, EntityManagerInterface $em, UserPasswordHasherInterface $passHach): Response
     {
+
         //je crée le formulaire
 
-        $formUser = $this->createForm(UserType::class, $participant);
+        $formUser = $this->createForm(UserType::class, $this->getUser());
         $formUser->handleRequest($req);
         if ($formUser->isSubmitted() && $formUser->isValid()) {
 
             $imageDoss = $formUser->get('image')->getData();
 
                 $hashPassword = $formUser->get('password')->getData();
-                $participant->setPassword($hashPassword);
+                $this->getUser()->setPassword($hashPassword);
                 $encodePass = $passHach->hashPassword(
-                    $participant,
+                    $this->getUser(),
                     $hashPassword
                 );
-                $participant->setPassword($encodePass);
-                $em->persist($participant);
+                $this->getUser()->setPassword($encodePass);
+                $em->persist($this->getUser());
                 $em->flush();
 
-                dump('profilModifier');
 
             if ($imageDoss) {
                 $nomFichier = pathinfo($imageDoss->getClientOriginalName(), PATHINFO_FILENAME);
@@ -57,12 +57,11 @@ class PersonneController extends AbstractController
                     );
                 } catch (FileException $e) {
                 }
-                $participant->setImage($newNom);
-                $em->persist($participant);
-               $em->flush();
+                $this->getUser()->setImage($newNom);
+                $em->persist($this->getUser());
+                $em->flush();
             }
 
-//            return $this->render('sortie/monProfil.html.twig');
 
         }
 
