@@ -21,38 +21,38 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $id;
 
-    /**
-     * @Assert\NotBlank(message="Veuillez renseigner votre nom.")
-     * @Assert\Length(min="3", max="50",
-     *     minMessage="Trop court. Au moins 3 caractères.",
-     *     maxMessage="Trop long. Maximum 50 caractères.")
-     * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux dans le champ
-     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/",htmlPattern="/.+/",
-     *     message="Le nom ne doit pas contenir de caractères spéciaux")
-     * @ORM\Column(type="string", length=50)
-     */
+//    /**
+//     * @Assert\NotBlank(message="Veuillez renseigner votre nom.")
+//     * @Assert\Length(min="3", max="50",
+//     *     minMessage="Trop court. Au moins 3 caractères.",
+//     *     maxMessage="Trop long. Maximum 50 caractères.")
+//     * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux dans le champ
+//     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/",htmlPattern="/.+/",
+//     *     message="Le nom ne doit pas contenir de caractères spéciaux")
+//     * @ORM\Column(type="string", length=50)
+//     */
     private $nom;
-    /**
-     * @Assert\NotBlank(message="Veuillez renseigner votre prenom.")
-     * @Assert\Length(min="2", max="50",
-     *     minMessage="Trop court. Au moins 2 caractères.",
-     *     maxMessage="Trop long. Maximum 50 caractères.")
-     * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux dans le champ
-     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/", htmlPattern="/.+/",
-     *     message="Le prenom ne doit pas contenir de caractères spéciaux")
-     * @ORM\Column(type="string", length=50)
-     */
+//    /**
+//     * @Assert\NotBlank(message="Veuillez renseigner votre prenom.")
+//     * @Assert\Length(min="2", max="50",
+//     *     minMessage="Trop court. Au moins 2 caractères.",
+//     *     maxMessage="Trop long. Maximum 50 caractères.")
+//     * Ceci est un pattern qui interdit l'utilisation de caractères spéciaux dans le champ
+//     * @Assert\Regex(pattern="/([A-Z]|[a-z])[a-z]*(_)?[a-z]+$/", htmlPattern="/.+/",
+//     *     message="Le prenom ne doit pas contenir de caractères spéciaux")
+//     * @ORM\Column(type="string", length=50)
+//     */
     private $prenom;
 
-    /**
-     * @Assert\Length(min="10", max="10",
-     *     minMessage="Le numéro de téléphone doit être composé de 10 numéro",
-     *     maxMessage="Le numéro de téléphone doit être composé de 10 numéro")
-     * Ceci est un pattern qui oblige l'utilisateur à inscrire que des chiffres(10) avec la possibilités d'utilisé l'indicatifs téléphoniques
-     * @Assert\Regex(pattern="/(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/", htmlPattern="/.+/",
-     *     message="Saisir un numéro de téléphone")
-     * @ORM\Column(type="string", length=50)
-     */
+//    /**
+//     * @Assert\Length(min="10", max="10",
+//     *     minMessage="Le numéro de téléphone doit être composé de 10 numéro",
+//     *     maxMessage="Le numéro de téléphone doit être composé de 10 numéro")
+//     * Ceci est un pattern qui oblige l'utilisateur à inscrire que des chiffres(10) avec la possibilités d'utilisé l'indicatifs téléphoniques
+//     * @Assert\Regex(pattern="/(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/", htmlPattern="/.+/",
+//     *     message="Saisir un numéro de téléphone")
+//     * @ORM\Column(type="string", length=50)
+//     */
     private $telephone;
 
     /**

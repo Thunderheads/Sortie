@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Etat;
-use App\Entity\Participant;
+
 use App\Entity\Sortie;
 use App\Form\AnnulerModele;
 use App\Form\AnnulerModeleType;
@@ -29,6 +28,7 @@ use Symfony\Component\Routing\Annotation\Route;
          */
         public function creerUneSortie(Request $req, EntityManagerInterface $em, ParticipantRepository $participantRepository, EtatRepository $etatRepository): Response
         {
+
 
             //creation d'instance
             $sortie = new  Sortie();
@@ -107,6 +107,12 @@ use Symfony\Component\Routing\Annotation\Route;
             $sortieForm = $this->createForm(UpdateSortieType::class, $sortie);
             $sortieForm->handleRequest($req);
 
+            //empeche le user si il n'est pas l'organisateur
+
+            if($this->getUser()->getId() !== $sortie->getOrganisateur()->getId()){
+                return $this->redirectToRoute('home');
+            }
+
 
             //Si le formulaire est valide et soumis
             if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
@@ -127,7 +133,7 @@ use Symfony\Component\Routing\Annotation\Route;
                     $em->flush();
 
                     //redirection vers la page d'accueil
-                    return $this->redirectToRoute('sortiehome');
+                    return $this->redirectToRoute('home');
                 }
 
                 //si le bouton Enregistrer est cliqué
@@ -141,21 +147,21 @@ use Symfony\Component\Routing\Annotation\Route;
                     $em->persist($sortie);
                     $em->flush();
                     //redirection vers la page d'accueil
-                    return $this->redirectToRoute('sortiehome');
+                    return $this->redirectToRoute('home');
                 }
 
                 //si le bouton Annuler est cliqué
                 if($sortieForm->get('Annuler')->isClicked()){
 
                     //redirection vers la page d'accueil
-                    return $this->redirectToRoute('sortiehome');
+                    return $this->redirectToRoute('home');
 
                 }
 
                 if($sortieForm->get('Supprimer')->isClicked()){
                     $em->remove($sortie);
                     $em->flush();
-                    return $this->redirectToRoute('sortiehome');
+                    return $this->redirectToRoute('home');
                 }
             }
             return $this->render('sortie/modifierUneSortie.html.twig', [
@@ -174,6 +180,11 @@ use Symfony\Component\Routing\Annotation\Route;
             //je crée mon form avc les parametres dans la classe annulerType
             $annuleForm = $this->createForm(AnnulerModeleType::class , $annulerModele);
             $annuleForm->handleRequest($requestA);
+
+            //empeche le user si il n'est pas l'organisateur
+            if($this->getUser()->getId() !== $sortie->getOrganisateur()->getId()){
+                return $this->redirectToRoute('home');
+            }
 
             if ($annuleForm->isSubmitted() && $annuleForm->isValid()) {
 

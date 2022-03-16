@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=VilleRepository::class)
@@ -29,6 +28,7 @@ class Ville
     private $nom;
 
     /**
+     * @Groups("ville")
      * @Groups("lieux")
      * @ORM\Column(type="string", length=5)
      */
@@ -36,7 +36,7 @@ class Ville
 
     /**
      * @ORM\OneToMany(targetEntity=Lieu::class, mappedBy="ville")
-     *
+     * @Groups("ville")
      */
     private $lieus;
 

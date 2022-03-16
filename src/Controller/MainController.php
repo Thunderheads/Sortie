@@ -9,6 +9,7 @@ use App\Form\HomeType;
 use App\Form\SortieType;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Service\ServiceHomePage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,11 +29,9 @@ class MainController extends AbstractController
     /**
      * @Route("/home", name="home")
      */
-    public function home(SortieRepository $sortieRepo, ParticipantRepository $user, Request $req): Response
+    public function home(ServiceHomePage $service,SortieRepository $sortieRepo, ParticipantRepository $user, Request $req): Response
     {
-        /**
-         * @TODO faire en sorte de recuperer l'utilisateur connecté et pas un user aléatoire
-         */
+        $service->updateEtat();
         //creation objet
         $homeModele = new HomeModele();
         $form = $this->createForm(HomeType::class, $homeModele);
@@ -41,8 +40,9 @@ class MainController extends AbstractController
         $filtreSortie = $sortieRepo->findAll();
 
         if($form->isSubmitted() && $form->isValid()){
-            $randomUser = $user->find(1);
-            $filtreSortie = $sortieRepo->findHome($homeModele, $randomUser);
+
+
+            $filtreSortie = $sortieRepo->findHome($homeModele, $this->getUser());
 
 
         }
@@ -50,7 +50,9 @@ class MainController extends AbstractController
         return $this->render('sortie/home.html.twig', [
 
             'sorties' => $filtreSortie,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'user'=>$this->getUser()
+
         ]);
     }
 
