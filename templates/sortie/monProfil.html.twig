@@ -2,72 +2,90 @@
 
 {% block body %}
 
-        <div class="container col-8">
-            {{ form_start(formUser) }}
-            <div class="row">
-                <div class="col-4">
-                    {{ form_row(formUser.image) }}
-                </div>
-                <div>
-                    {{ app.user.image }}
-                </div>
-                <div class="col-5">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Mon Profil</h3>
-                        </div>
+    <div class="container-fluid card justify-content-around">
+        {{ form_start(formUser) }}
+        <div class="card-header text-white bg-info">
+            <h3>Mon Profil</h3>
+        </div>
 
-                        <div class="row">
-                            <div class="col-12  mt-2">
-                                {{ form_row(formUser.pseudo, {'attr': {'class': "form-control"}}) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-2">
-                                {{ form_row(formUser.prenom, {'attr': {'class': "form-control"}}) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-2">
-                                {{ form_row(formUser.nom, {'attr': {'class': "form-control"}}) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-2">
-                                {{ form_row(formUser.telephone, {'attr': {'class': "form-control"}}) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-2">
-                                {{ form_row(formUser.email, {'attr': {'class': "form-control"}}) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-2">
-                                {{ form_row(formUser.password.first, {'attr': {'class': "form-control"}}) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-2">
-                                {{ form_row(formUser.password.second, {'attr': {'class': "form-control"}}) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-2">
-                                {{ form_row(formUser.Campus, {'attr': {'class': "form-select",'aria-label':"Default select example",'width':'fit'}} )}}
-                            </div>
+        <div class="row my-5">
+            <div class="col-5 ">
+                <div class="row justify-content-end">
+                    <div class="border-dark">
+                        <div class="card-body text-center">
+                        <img class="card-body text-center mx-5 border mt-5" src="{{ asset('img/'~ app.user.image) }}">
                         </div>
                     </div>
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                {{ form_row(formUser.Enregistrer , {'attr': {'class':'btn btn-primary'}}) }}
-                            </div>
-                            <div class="col-6">
-                                {{ form_row(formUser.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
-                            </div>
+                </div>
+            </div>
+
+            <div class=" col-5">
+                <div class="me-5">
+                    <div class="row">
+                        <div class="col-10  mt-2">
+                            {{ form_row(formUser.pseudo, {'attr': {'class': "form-control"}}) }}
                         </div>
-                        {{ form_end(formUser) }}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-10 mt-2">
+                            {{ form_row(formUser.prenom, {'attr': {'class': "form-control"}}) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-10 mt-2">
+                            {{ form_row(formUser.nom, {'attr': {'class': "form-control"}}) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-10 mt-2">
+                            {{ form_row(formUser.telephone, {'attr': {'class': "form-control"}}) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-10 mt-2">
+                            {{ form_row(formUser.email, {'attr': {'class': "form-control"}}) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-10 mt-2">
+                            {{ form_row(formUser.password.first, {'attr': {'class': "form-control"}}) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-10 mt-2">
+                            {{ form_row(formUser.password.second, {'attr': {'class': "form-control"}}) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-10 mt-2">
+                            {{ form_row(formUser.Campus, {'attr': {'class': "form-select",'aria-label':"Default select example",'width':'fit'}} ) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-10 mt-2">
+                            {{ form_row(formUser.image) }}
+                        </div>
+                    </div>
+                    <div class="row justify-content-around mt-2">
+                        <div class="col-5">
+                            {{ form_row(formUser.Enregistrer , {'attr': {'class':'btn btn-primary'}}) }}
+                        </div>
+
+                        <div class="col-5">
+                            {{ form_row(formUser.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
+                        </div>
+                    </div>
+                    {{ form_end(formUser) }}
                 </div>
             </div>
         </div>
+    </div>
 {% endblock %}

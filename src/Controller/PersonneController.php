@@ -34,13 +34,15 @@ class PersonneController extends AbstractController
 
             $imageDoss = $formUser->get('image')->getData();
 
-                $hashPassword = $formUser->get('password')->getData();
-                $this->getUser()->setPassword($hashPassword);
-                $encodePass = $passHach->hashPassword(
-                    $this->getUser(),
-                    $hashPassword
-                );
-                $this->getUser()->setPassword($encodePass);
+                $plainPassword = $formUser->get('password')->getData();
+                if($plainPassword) {
+                    $this->getUser()->setPassword($plainPassword);
+                    $encodePass = $passHach->hashPassword(
+                        $this->getUser(),
+                        $plainPassword
+                    );
+                    $this->getUser()->setPassword($encodePass);
+                }
                 $em->persist($this->getUser());
                 $em->flush();
 
