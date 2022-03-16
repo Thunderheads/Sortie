@@ -76,6 +76,7 @@ class PersonneController extends AbstractController
                 $em->persist($this->getUser());
                 $em->flush();
             }
+            return $this->redirectToRoute('home');
 
 
         }
