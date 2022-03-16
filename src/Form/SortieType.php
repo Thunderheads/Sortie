@@ -10,6 +10,7 @@ use App\Entity\Ville;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,7 +34,7 @@ class SortieType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('dateLimiteInscription', DateTimeType::class, [
+            ->add('dateLimiteInscription', DateType::class, [
                 'label' => 'Date limite d\'inscription : ',
                 'html5' => true,
                 'widget' => 'single_text',

@@ -5,8 +5,8 @@
         <h2 class="mx-4">Filtrer les sorties</h2>
 
         {{ form_start(form) }}
-        <div class="row">
-            <div class="col-4">
+        <div class="row justify-content-around mt-5 mb-5">
+            <div class="col-6">
                 <!-- ligne campus -->
                 <div class="row">
                     <div class="col">
@@ -25,7 +25,7 @@
                 </div>
 
                 <!-- champ de recherche -->
-                <div class="row">
+                <div class="row mt-3 mb-4">
                     <div class="col">
                         {{ form_label(form.recherche ) }}
                     </div>
@@ -40,80 +40,91 @@
 
 
                 <!-- date debut fin -->
-                <div class="">
-                    <div class="col">
+                <div class="row ">
+
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-2">
                         {{ form_label(form.dateDebutRecherche ) }}
-                    </div>
-                    <div class="col">
+                            </div>
+                            <div class="col-10">
                         {{ form_widget(form.dateDebutRecherche,{'attr':
-                            {
-                                'class':"form-control",
-                            }}) }}
+                                {
+                                    'class':"form-control",
+                                }}) }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        {{ form_label(form.dateFin ) }}
-                    </div>
-                    <div class="col">
+
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-1">
+                                {{ form_label(form.dateFin ) }}
+                            </div>
+                            <div class="col-11">
+
                         {{ form_widget(form.dateFin,{'attr':
                             {
                                 'class':"form-control",
                             }}) }}
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
 
             <!-- check box -->
-            <div class="col-2">
+            <div class="col-3">
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col-1">
                         {{ form_widget(form.sortieOrganisees) }}
                     </div>
-                    <div class="col">
+                    <div class="col-10">
                         {{ form_label(form.sortieOrganisees ) }}
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col-1">
                         {{ form_widget(form.sortieInscrit) }}
                     </div>
-                    <div class="col">
+                    <div class="col-10">
                         {{ form_label(form.sortieInscrit ) }}
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col-1">
                         {{ form_widget(form.sortieNonInscrit) }}
                     </div>
-                    <div class="col">
+                    <div class="col-10">
                         {{ form_label(form.sortieNonInscrit ) }}
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col-1">
                         {{ form_widget(form.sortiePass) }}
                     </div>
-                    <div class="col">
+                    <div class="col-10">
                         {{ form_label(form.sortiePass ) }}
                     </div>
                 </div>
             </div>
 
             <!-- bouton recherche -->
-            <div class="col-4">
+            <div class="col-2 mt-5">
                 <div class="row">
-                    {{ form_widget(form.Enregistrer, {'attr': {'class':'btn btn-primary'}}) }}
+                    {{ form_widget(form.Rechercher, {'attr': {'class':'btn btn-primary btn-lg'}}) }}
                 </div>
             </div>
         </div>
 
         {{ form_end(form) }}
 
-        <div class="container mx-3">
+        <div class="container ml-5 mt-5">
             <div style="height: 400px; overflow: scroll">
                 <table class="table table-bordered">
                     <thead>
@@ -149,7 +160,7 @@
                                 <td>  </td>
                             {%  endif %}
 
-                            <td>{{ c.organisateur.nom }}</td>
+                            <td>{{ c.organisateur.pseudo }}</td>
 
                             <!-- si je suis propriétaire -->
                             {%  if c.organisateur.id == user.id %}
