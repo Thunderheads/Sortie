@@ -131,6 +131,16 @@ class PersonneController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
+    /**
+     * @Route("/profil/{id}", name="afficherProfil")
+     */
+    public function participant(Participant $participant): Response
+    {
+        return $this->render('sortie/afficherParticipant.html.twig', [
+            'participant'=> $participant
+        ]);
 
+
+    }
 
 }
