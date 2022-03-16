@@ -31,6 +31,7 @@ class UserType extends AbstractType
 
             ->add('email')
 
+            //utilise un type de repetition pour traiter un parametres password avec 2 options
             ->add('password', RepeatedType::class,[
                 'mapped'=> false,
                 'required'=>false,
@@ -52,7 +53,11 @@ class UserType extends AbstractType
                 'required'=>false,
                 'constraints' => [
                 new File([
+
+                    //défini la taille du dossier
                     'maxSize' => '111111111111111111k',
+
+                    //défini les formats utiliser
                     'mimeTypes'=> [
                         'image/jpeg',
                         'image/jpg',

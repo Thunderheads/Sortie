@@ -30,11 +30,17 @@ class PersonneController extends AbstractController
 
         $formUser = $this->createForm(UserType::class, $this->getUser());
         $formUser->handleRequest($req);
+
+        // si le formulaire est soumis et valide alors
         if ($formUser->isSubmitted() && $formUser->isValid()) {
 
+            //récupère les données d'image du form
             $imageDoss = $formUser->get('image')->getData();
 
+                //récupère le password du form en clair
                 $plainPassword = $formUser->get('password')->getData();
+
+                //si le password est remplie, j'update le password et je le 'hash'
                 if($plainPassword) {
                     $this->getUser()->setPassword($plainPassword);
                     $encodePass = $passHach->hashPassword(
@@ -46,12 +52,18 @@ class PersonneController extends AbstractController
                 $em->persist($this->getUser());
                 $em->flush();
 
-
+                //si j'ai mon dossier image
             if ($imageDoss) {
+
+                //cette condition est nécessaire car le champ d'image n'est pas obligatoire
+                //et le fichier doit être traité uniquement lorsqu'un fichier est téléchargé
                 $nomFichier = pathinfo($imageDoss->getClientOriginalName(), PATHINFO_FILENAME);
+
+                //inclus en toute sécurité le nom du fichier dans l'URL
                 $safeNom = $slugger->slug($nomFichier);
                 $newNom = $safeNom . '-' . uniqid() . '.' . $imageDoss->guessExtension();
 
+                //Déplace le fichier dans le répertoire où sont stockées les images
                 try {
                     $imageDoss->move(
                         $this->getParameter('img_directory'),
@@ -59,6 +71,7 @@ class PersonneController extends AbstractController
                     );
                 } catch (FileException $e) {
                 }
+                //update l'image du user (enregistre la récupération du user et envoi
                 $this->getUser()->setImage($newNom);
                 $em->persist($this->getUser());
                 $em->flush();
