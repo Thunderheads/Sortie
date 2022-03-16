@@ -25,7 +25,7 @@ class UpdateSortieType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('dateLimiteInscription',DateTimeType::class, [
+            ->add('dateLimiteInscription',DateType::class, [
                 'label' => 'dateLimiteInscription ',
                 'html5' => true,
                 'widget' => 'single_text',
