@@ -13,7 +13,7 @@
                 <div class="row justify-content-end">
                     <div class="border-dark">
                         <div class="card-body text-center">
-                        <img class="card-body text-center mx-5 border mt-5" src="{{ asset('img/'~ app.user.image) }}">
+                        <img style="width: 350px" class="card-body text-center mx-5 border mt-5" src="{{ asset('img/'~ app.user.image) }}">
                         </div>
                     </div>
                 </div>
@@ -70,11 +70,11 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-10 mt-2">
-                            {{ form_row(formUser.image) }}
+                        <div class="col-10 mt-4">
+                            {{ form_widget(formUser.image) }}
                         </div>
                     </div>
-                    <div class="row justify-content-around mt-2">
+                    <div class="row justify-content-around mt-4">
                         <div class="col-5">
                             {{ form_row(formUser.Enregistrer , {'attr': {'class':'btn btn-primary'}}) }}
                         </div>
