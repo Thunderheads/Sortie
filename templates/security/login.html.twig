@@ -1,40 +1,86 @@
 {% extends 'baseLogin.html.twig' %}
+{% block logo %}
+<div class="col-2 justify-content-end">
+    <img src="{{ asset('knight/assets/img/MicrosoftTeams-image-removebg-preview.png') }}" alt="">
+</div>
+{% endblock %}
 
 {% block login %}
-<form method="post">
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
 
-    <h1 data-aos="zoom-in">Connectez-vous</h1>
-    <label for="inputEmail">Email</label>
-    <input type="text" name="email" id="inputEMail" class="form-control" placeholder="Email" required>
+    <div class="container col-5">
+        <form method="post">
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+
+            <!--Ligne titre-->
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="mb-1" data-aos="fade-down">Connectez-vous</h1>
+                </div>
+            </div>
+
+            <!--Ligne Email-->
+
+            <div class="row col-12">
+                <div class="row mb-2" data-aos="zoom-in">
+                    <div class="col-1">
+                        <label for="inputEmail">Identifiant:</label>
+                    </div>
+                </div>
+                <div class="row  mb-2">
+                    <div class="col" data-aos="zoom-in">
+                        <input type="text" name="email" id="inputEMail" class="form-control"
+                               placeholder="Email ou pseudo"
+                               required>
+                    </div>
+                </div>
+            </div>
+
+            <!--Ligne Mot de passe-->
+            <div class="row col-12">
+                <div class="row mb-2" data-aos="zoom-in">
+                    <div class="col-1">
+                        <label for="inputPassword">Password:</label>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col" data-aos="zoom-in">
+                        <input type="password" name="password" id="inputPassword" class="form-control"
+                               placeholder="Mot de passe"
+                               required>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            <!--Ligne remenber me-->
+            <div class="row col-12 " data-aos="fade-up" data-aos-delay="200">
+                <label class="col mb-2 mt-2">
+                    <input type="checkbox" name="_remember_me"/>
+                    Se souvenir de moi
+                </label>
 
 
-    <label class="" for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+                <!--Ligne bouton-->
+                <div class="row">
+                    <div class="col-12">
+                        <button data-aos="fade-up" data-aos-delay="200" class="btn-dark btn-lg" type="submit">
+                            Se connecter
+                        </button>
+                    </div>
+                </div>
+            </div>
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <div class="row" data-aos="fade-up" data-aos-delay="200">
-        <label>
-            <input  type="checkbox" name="_remember_me"/>
-            Se souvenir de moi
-        </label>
+        </form>
     </div>
 
-    <div class="row col-12">
-        <button data-aos="fade-up" data-aos-delay="200" class="btn-get-started scrollto" type="submit">
-            Se connecter
-        </button>
-    </div>
 
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-</form>
 {% endblock %}
