@@ -144,7 +144,7 @@
             function getComboA(selectObject) {
                 const value = selectObject.value
 
-                let url = "http://localhost/paricilasortie/public/lieu/" + value;
+                let url = "lieu/" + value;
 
                 fetch(url)
                     .then(reponse => reponse.json())

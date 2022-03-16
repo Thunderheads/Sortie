@@ -50,6 +50,36 @@ class SortieRepository extends ServiceEntityRepository
     }
 
     /**
+     * Fonction en charge de trouver les sorties dont la date limite est passée
+     * @return float|int|mixed|string
+     */
+    public function findByDateLimite(){
+        $date = new \DateTime('now');
+        $queryBuilder = $this->createQueryBuilder('s');
+        $queryBuilder
+            ->andWhere('s.dateLimiteInscription < :now')
+            ->setParameter(':now', $date);
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Fonction en charge de trouver les sorties dont la date début est passée
+     * @return float|int|mixed|string
+     */
+    public function findByDateDebut(){
+        $date = new \DateTime('now');
+
+        $minutes_to_add = 500;
+        $time =  new \DateTime('now');
+        $time->add(new \DateInterval('PT' . $minutes_to_add . 'M'));
+
+        $queryBuilder = $this->createQueryBuilder('s');
+        $queryBuilder
+            ->andWhere('s.dateHeureDebut < :now')
+            ->setParameter(':now', $date);
+        return $queryBuilder->getQuery()->getResult();
+    }
+    /**
      * Fonction en charge de réaliser le filtre des sorties en fonction des plusieurs paramètres
      *
      * @param HomeModele $homeModele
@@ -110,7 +140,7 @@ class SortieRepository extends ServiceEntityRepository
         }
 
         //quand sorties auxquelles je suis inscrit/e et sorties auxquelles je ne suis pas inscrit/e sont cochées
-        if(!($hasRegister && $isRegister)){
+
             // sorties auxquelles je suis inscrit/e
             if($hasRegister )
             {
@@ -124,7 +154,7 @@ class SortieRepository extends ServiceEntityRepository
                 $queryBuilder->andWhere(':participant NOT MEMBER OF s.Participant')
                     ->setParameter(':participant', $id );
             }
-        }
+
 
 
         // sorties passées

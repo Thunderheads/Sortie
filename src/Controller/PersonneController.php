@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
+use App\Entity\Sortie;
 use App\Form\UserType;
+use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,4 +72,51 @@ class PersonneController extends AbstractController
 
 
     }
+
+    /**
+     * Chemin pour s'inscrire à une sortie
+     *
+     * @Route("/inscrire/{id}", name="inscrire")
+     */
+    public function inscrire(Sortie $sortie, EntityManagerInterface $em): Response
+    {
+        $sortie->getParticipant()->add($this->getUser());
+        $em->persist($sortie);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+
+    /**
+     * Chemin pour se désinscrire à une sortie
+     *
+     * @Route("/desinscrire/{id}", name="desinscrire")
+     */
+    public function desinscrire(Sortie $sortie, EntityManagerInterface $em): Response
+    {
+        $sortie->getParticipant()->removeElement($this->getUser());
+        $em->persist($sortie);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+     * Chemin pour se désinscrire à une sortie
+     *
+     * @Route("/publier/{id}", name="publier")
+     */
+    public function publier(Sortie $sortie, EntityManagerInterface $em, EtatRepository $etatRepo): Response
+    {
+        $etat = $etatRepo->findOneBy(["libelle"=>"Ouverte"]);
+        $sortie->setEtat($etat);
+        $em->persist($sortie);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+
+
 }

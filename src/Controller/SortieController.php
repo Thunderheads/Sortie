@@ -120,7 +120,8 @@ use Symfony\Component\Routing\Annotation\Route;
             $sortieForm->handleRequest($req);
 
             //empeche le user si il n'est pas l'organisateur
-            if($this->getUser() !== $sortie->getOrganisateur()->getId()){
+
+            if($this->getUser()->getId() !== $sortie->getOrganisateur()->getId()){
                 return $this->redirectToRoute('home');
             }
 
@@ -193,7 +194,7 @@ use Symfony\Component\Routing\Annotation\Route;
             $annuleForm->handleRequest($requestA);
 
             //empeche le user si il n'est pas l'organisateur
-            if($this->getUser() !== $sortie->getOrganisateur()->getId()){
+            if($this->getUser()->getId() !== $sortie->getOrganisateur()->getId()){
                 return $this->redirectToRoute('home');
             }
 
@@ -227,7 +228,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
             return $this->render('sortie/annulerLaSortie.html.twig', [
                 'sortie'=>$sortie,
-                'annuleForm'=>$annuleForm->createView()
+                'annuleForm'=>$annuleForm->createView(),
+
 
             ]);
         }
