@@ -126,7 +126,6 @@ class AppFixtures extends Fixture
             $participant->setPassword($this->hasher->hashPassword($participant, '123'));
             $participant->setActif(true);
             $participant->setPseudo($this->faker->userName);
-
             $campus = $this->manager->getRepository(Campus::class)->findAll();
             $participant->setCampus($this->faker->randomElement($campus));
 
@@ -205,11 +204,19 @@ class AppFixtures extends Fixture
      */
     public function addCampus() {
 
-        for ($i = 0; $i < 10; $i++){
-            $campus = new Campus();
-            $campus->setNom($this->faker->name);
-            $this->manager->persist($campus);
-        }
+        $campus = new Campus();
+        $campus->setNom('Niort');
+        $this->manager->persist($campus);
+
+        $campus = new Campus();
+        $campus->setNom('Nantes');
+        $this->manager->persist($campus);
+
+        $campus = new Campus();
+        $campus->setNom('Rennes');
+        $this->manager->persist($campus);
+
+
         $this->manager->flush();
     }
 
