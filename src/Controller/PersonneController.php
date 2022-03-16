@@ -59,7 +59,7 @@ class PersonneController extends AbstractController
                 $em->persist($this->getUser());
                 $em->flush();
             }
-            
+
 
         }
 
