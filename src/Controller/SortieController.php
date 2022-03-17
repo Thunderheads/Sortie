@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/new/", name="creerUneSortie")
          */
-        public function creerUneSortie(Request $req, EntityManagerInterface $em, ParticipantRepository $participantRepository, EtatRepository $etatRepository): Response
+        public function creerUneSortie(Request $req, EntityManagerInterface $em, EtatRepository $etatRepository): Response
         {
 
 
@@ -101,7 +101,7 @@ use Symfony\Component\Routing\Annotation\Route;
         /**
          * @Route("/update/{id}", name="modifierUneSortie")
          */
-        public function modifierUneSortie(Request $req, Sortie $sortie, SortieRepository $sortieRepository, EntityManagerInterface $em, ParticipantRepository $participantRepository, EtatRepository $etatRepository): Response
+        public function modifierUneSortie(Request $req, Sortie $sortie, EntityManagerInterface $em, ParticipantRepository $participantRepository, EtatRepository $etatRepository): Response
         {
 
 
