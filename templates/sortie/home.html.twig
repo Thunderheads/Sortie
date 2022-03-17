@@ -176,7 +176,7 @@
 
                                 {% else %}
                                     <!-- si la date d'inscription est pas passée-->
-                                    {% if ('now'|date('Y-m-d'))<= (c.dateLimiteInscription|date('Y-m-d')) %}
+                                    {% if ('now'|date('Y-m-d'))<= (c.dateLimiteInscription|date('Y-m-d')) and (c.etat.libelle != 'Annulée') %}
                                         <td> <a href="{{ path('sortieafficherUneSortie', { 'id': c.id}) }}">Afficher</a> - <a href="{{ path('sortieannulerLaSortie', { 'id': c.id}) }}">Annuler</a></td>
                                     {% else %}
                                         <td> <a href="{{ path('sortieafficherUneSortie', { 'id': c.id}) }}">Afficher</a>  - Annuler</td>
