@@ -7,6 +7,7 @@ use App\Entity\Lieu;
 use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,13 +21,13 @@ class UpdateSortieType extends AbstractType
         $builder
             ->add('nom')
             ->add('dateHeureDebut', DateTimeType::class, [
-                'label' => 'dateHeureDebut',
+                'label' => 'Date et heure de la sortie : ',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
             ])
             ->add('dateLimiteInscription',DateType::class, [
-                'label' => 'dateLimiteInscription ',
+                'label' => 'Date limite d\'inscription : ',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
@@ -53,7 +54,7 @@ class UpdateSortieType extends AbstractType
             ->add('Enregistrer', SubmitType::class)
             ->add('Publier', SubmitType::class)
             ->add('Supprimer', SubmitType::class)
-            ->add('Annuler', SubmitType::class)
+            ->add('Annuler', ButtonType::class)
         ;
     }
 

@@ -3,7 +3,7 @@
 {% block title %}Hello SortieController!{% endblock %}
 
 {% block body %}
-    <div class ="container-fluid">
+    <div class="container-fluid">
         <div class="card ">
             <div class="card-header text-white bg-info">
                 Modifier une sortie
@@ -15,131 +15,102 @@
 
             <!-- ligne 1-->
             <div class="form-row col-12 d-flex justify-content-around">
-                <div class = "col-md-5 mb-3">
-                    <label for="{{ field_name(sortieForm.nom) }}"> Nom de la sortie </label>
-                    <input type="text"
-                           id="{{ field_name(sortieForm.nom) }}"
-                           name="{{ field_name(sortieForm.nom) }}"
-                           value="{{ sortie.nom }}"
-                           class="form-control"
-                    >
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom de la sortie'}}) }}
                 </div>
 
-                <div class = "col-md-5 mb-3">
-                    {{ form_label(sortieForm.Campus )}}
-                    {{ form_widget(sortieForm.Campus, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
-                </div>
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.Campus, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}    </div>
             </div>
 
             <!-- ligne 2-->
             <div class="form-row col-12 d-flex justify-content-around">
-                <div class = "col-md-5 mb-3">
-                    {{ form_label(sortieForm.dateHeureDebut )}}
-                    {{ form_widget(sortieForm.dateHeureDebut) }}
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.dateHeureDebut) }}
                 </div>
 
-                <div class = "col-md-5 mb-3 ">
-                    {{ form_label(sortieForm.Lieu )}}
-                    {{ form_widget(sortieForm.Lieu, {'attr': {'class':"form-select", 'aria-label':"Default select example", 'width':'fit'}}) }}
+                <div class="col-md-5 mb-3 ">
+                    {{ form_row(sortieForm.Lieu, {'attr': {'class': 'form-select', 'onchange': 'getComboB(this)'}}) }}
                 </div>
             </div>
 
             <!-- ligne 3-->
             <div class="form-row col-12 d-flex justify-content-around">
-                <div class = "col-md-5 mb-3">
-                    {{ form_label(sortieForm.dateLimiteInscription )}}
-                    {{ form_widget(sortieForm.dateLimiteInscription) }}
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.dateLimiteInscription) }}
+                </div>
+                <div class="col-md-5 mb-5 ">
+                    <div class="row">
+                        <label class="col-2"> Rue :</label>
+                        <p class="col-6">{{ sortie.lieu.rue }}</p>
+                    </div>
                 </div>
 
-                <div class = "col-md-5 mb-3">
-                    <label> Lieu </label>
-                </div>
+
             </div>
 
 
             <!-- ligne 4-->
             <div class="form-row col-12 d-flex justify-content-around">
-                <div class = "col-md-5 mb-3">
-                    <label for="{{ field_name(sortieForm.nbInscriptionMax) }}"> Nombre de places : </label>
-                    <input type="number"
-                           id="{{ field_name(sortieForm.nbInscriptionMax) }}"
-                           name="{{ field_name(sortieForm.nbInscriptionMax) }}"
-                           value="{{ sortie.nbInscriptionMax }}"
-                           class="form-control">
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.nbInscriptionMax, {'attr': {'class': 'form-control', 'type': 'number'}}) }}
+
+                </div>
+                <div class="col-md-5 mb-3 ">
+                    <div class="row">
+                        <label class="col-3"> Code Postal :</label>
+                        <p class="col-1">{{ sortie.lieu.ville.codePostal }}</p>
+                    </div>
                 </div>
 
-                <div class = "col-md-5 mb-3 ">
-                    <label> Rue </label>
-                </div>
             </div>
 
 
             <!-- ligne 5-->
             <div class="form-row col-12 d-flex justify-content-around">
-                <div class = "col-md-5 mb-3">
-                    <label for="{{ field_name(sortieForm.duree) }}"> Durée : </label>
-                    <input type="number"
-                           id="{{ field_name(sortieForm.duree) }}"
-                           name="{{ field_name(sortieForm.duree) }}"
-                           value="{{ sortie.duree }}"
-                           class="form-control">
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.duree, {'attr': {'class': 'form-control'}}) }}
                 </div>
-
-                <div class = "col-md-5 mb-3">
-                    <label> Code postal </label>
+                <div class="col-md-5 mb-3">
+                    <div class="row">
+                        <label class="col-6"> Latitude :</label>
+                        <p class="col-6">{{ sortie.lieu.latitude }}</p>
+                    </div>
                 </div>
             </div>
 
 
             <!-- ligne 6-->
-            <div class="form-row col-12 d-flex justify-content-around">
-                <div class = "col-md-5 mb-3">
-                    <label for="{{ field_name(sortieForm.infosSortie) }}"> Description : </label>
-                    <input type="textarea"
-                           id="{{ field_name(sortieForm.infosSortie) }}"
-                           name="{{ field_name(sortieForm.infosSortie) }}"
-                           value="{{ sortie.infosSortie }}"
-                           class="form-control">
+            <div class="form-row col-12 d-flex justify-content-around mb-5 mt-5">
+                <div class="col-md-5 mb-3">
+                    {{ form_row(sortieForm.infosSortie, {'attr': {'class': 'form-control', 'placeholder': 'Votre texte'}}) }}
                 </div>
-                <h1>TODO</h1>
-                <div class = "col-md-5 mb-3">
-                    <label> Code postal </label>
+                <div class="col-md-5 mb-3">
+                    <div class="row">
+                        <label class="col-6"> Longitude :</label>
+                        <p class="col-6">{{ sortie.lieu.longitude }}</p>
+                    </div>
                 </div>
             </div>
 
-
-            <!-- ligne 7 -->
-            <h1>TODO</h1>
-            <div class="form-row col-12 d-flex justify-content-around">
-                <div class = "col-md-5 mb-3">
-                    <label for=""> Description : </label>
-                    <input type="textarea"
-                           id=""
-                           name=""
-                           value=""
-                           class="form-control">
-                </div>
-                <div class = "col-md-5 mb-3">
-                    <label> Latitude </label>
-                    <label> Longitude </label>
-                </div>
-            </div>
 
             <!-- ligne des boutons -->
 
-            <div class="form-row col-12 d-flex justify-content-center mt-3">
+            <div class="form-row col-12 d-flex justify-content-center mb-5 mt-5">
                 <div class="col-2">
                     {{ form_widget(sortieForm.Enregistrer, {'attr': {'class':'btn btn-primary'}}) }}
                 </div>
                 <div class="col-2">
                     {{ form_widget(sortieForm.Publier, {'attr': {'class':'btn btn-primary'}}) }}
-                </div >
+                </div>
                 <div class="col-2">
                     {{ form_widget(sortieForm.Supprimer, {'attr': {'class':'btn btn-primary'}}) }}
-                </div >
+                </div>
                 <div>
-                    {{ form_widget(sortieForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
-                </div >
+                    <a href="{{ asset('home') }}">
+                        {{ form_widget(sortieForm.Annuler, {'attr': {'class':'btn btn-primary'}}) }}
+                    </a>
+                </div>
 
             </div>
 
