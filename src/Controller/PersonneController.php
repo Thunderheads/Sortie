@@ -136,6 +136,9 @@ class PersonneController extends AbstractController
      */
     public function participant(Participant $participant): Response
     {
+        if($participant->getImage() == null){
+            $participant->setImage('tof-default-6232eaa0cc753.jpg');
+        }
         return $this->render('sortie/afficherParticipant.html.twig', [
             'participant'=> $participant
         ]);

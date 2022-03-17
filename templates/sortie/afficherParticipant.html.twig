@@ -3,76 +3,78 @@
 {% block body %}
 
     <div class="container-fluid card justify-content-around">
+        <div class="card-header text-white bg-info">
+            <h3>Organisateur</h3>
+        </div>
+
         <div class="row my-5">
-            <div class="col-5">
+            <div class="col-5 ">
                 <div class="row justify-content-end">
                     <div class="border-dark">
                         <div class="card-body text-center">
-                            <img style="width: 350px" class="card-body text-center mx-5 border mt-5"
+                            <img style="width: 300px" class="card-body text-center mx-5 border mt-5"
                                  src="{{ asset('img/'~ participant.image) }}">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-5">
+            <div class=" container col-5 mt-3">
                 <div class="me-5">
-                    <div class="row">
-                        <div class="col-10 mt-2">
+                    <div class="col">
+                        <div class="col-10  mt-2">
+                            <i class="bi bi-person-check-fill text-black"></i>
                             <strong>{{ participant.pseudo }}</strong>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-10  mt-2">
-                            <p>Prénom:</p>
-                        </div>
-                        <div>
+                    <div class="justify-content-around">
+                        <label class=" mt-1">
+                            <p><u>Prénom</u>:</p>
+                        </label>
+                        <label class="">
                             {{ participant.prenom }}
-                        </div>
+                        </label>
                     </div>
-
-                    <div class="row">
-                        <div class="col-10 mt-2">
-                            <p>Nom:</p>
-                        </div>
-                        <div>
+                    <div class="justify-content-around">
+                        <label class=" mt-1">
+                            <p><u>Nom</u>:</p>
+                        </label>
+                        <label class="">
                             {{ participant.nom }}
-                        </div>
+                        </label>
                     </div>
-
-                    <div class="row">
-                        <div class="col-10 mt-2">
-                            <p>Téléphone:</p>
-                        </div>
-                        <div>
+                    <div class="justify-content-around">
+                        <label class=" mt-1">
+                            <p><u>Téléphone</u>:</p>
+                        </label>
+                        <label class="">
                             {{ participant.telephone }}
-                        </div>
+                        </label>
                     </div>
-
-                    <div class="row">
-                        <div class="col-10 mt-2">
-                            <p>Email:</p>
-                        </div>
-                        <div>
+                    <div class="justify-content-around">
+                        <label class=" mt-1">
+                            <p><u>Email</u></u>:</p>
+                        </label>
+                        <label class="">
                             {{ participant.email }}
-                        </div>
+                        </label>
                     </div>
-                    <div class="row">
-                        <div class="col-10 mt-2">
-                            <p>Campus</p>
-                        </div>
-                        <div>
+                    <div class="justify-content-around">
+                        <label class=" mt-1">
+                            <p><u>Campus</u>:</p>
+                        </label>
+                        <label class="">
                             {{ participant.campus.nom }}
-                        </div>
+                        </label>
                     </div>
-                    <div class="col-5 mt-3">
-                        <button class="btn btn-primary text-light" type="submit" href="{{ path('home') }}">Retour
-                        </button>
+                    <div class="row justify-content-around mt-4">
+                        <div class="col-10">
+                            <button class="btn btn-primary text-light" type="submit" href="{{ path('home') }}">Retour
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
