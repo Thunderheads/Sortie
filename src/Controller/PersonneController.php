@@ -76,6 +76,7 @@ class PersonneController extends AbstractController
                 $em->persist($this->getUser());
                 $em->flush();
             }
+            return $this->redirectToRoute('home');
 
 
         }
@@ -131,6 +132,19 @@ class PersonneController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
+    /**
+     * @Route("/profil/{id}", name="afficherProfil")
+     */
+    public function participant(Participant $participant): Response
+    {
+        if($participant->getImage() == null){
+            $participant->setImage('tof-default-6232eaa0cc753.jpg');
+        }
+        return $this->render('sortie/afficherParticipant.html.twig', [
+            'participant'=> $participant
+        ]);
 
+
+    }
 
 }

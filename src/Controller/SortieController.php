@@ -32,6 +32,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
             //creation d'instance
             $sortie = new  Sortie();
+            $sortie->setCampus($this->getUser()->getCampus());
             $sortieForm = $this->createForm(SortieType::class, $sortie);
             $sortieForm->handleRequest($req);
 
@@ -221,5 +222,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
             ]);
         }
+
 
     }

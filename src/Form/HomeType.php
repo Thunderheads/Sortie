@@ -28,7 +28,8 @@ class HomeType extends AbstractType
 
             ])
             ->add('recherche', TextType::class, [
-                'label' => 'Le nom de la sortie contient :'
+                'label' => 'Le nom de la sortie contient :',
+                'required'=>false
             ])
             ->add('dateDebutRecherche', DateType::class, [
                 'label' => 'Entre',
