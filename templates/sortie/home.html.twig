@@ -191,7 +191,7 @@
                             {% else %}
 
 
-                                <!-- si le nombre d'inscrit et la date sont cohérentes -->
+                                <!-- si le nombre d'inscrit et la date sont cohérentes  et si le participant est inscrit -->
                                 {% if (c.participant|length < c.nbInscriptionMax) and (('now'|date('Y-m-d'))<= (c.dateLimiteInscription|date('Y-m-d'))) and not isSubscribe %}
                                     <td><a href="{{ path('sortieafficherUneSortie', { 'id': c.id}) }}">Afficher</a> - <a
                                                 href=" {{ path('inscrire', { 'id': c.id}) }}">S'inscrire</a></td>

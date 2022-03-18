@@ -56,7 +56,7 @@ class HomeModele
     /**
      * @param \DateTimeInterface$dateDebutRecherche
      */
-    public function setDateDebutRecherche(\DateTimeInterface $dateDebutRecherche): void
+    public function setDateDebutRecherche(?\DateTimeInterface $dateDebutRecherche): void
     {
         $this->dateDebutRecherche = $dateDebutRecherche;
     }
@@ -72,7 +72,7 @@ class HomeModele
     /**
      * @param \DateTimeInterface $dateFin
      */
-    public function setDateFin(\DateTimeInterface $dateFin): void
+    public function setDateFin(?\DateTimeInterface $dateFin): void
     {
         $this->dateFin = $dateFin;
     }
