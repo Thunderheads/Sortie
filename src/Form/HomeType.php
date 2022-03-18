@@ -24,7 +24,8 @@ class HomeType extends AbstractType
                 'class' => Campus::class,
                 // uses the User.username property as the visible option string
                 'choice_label' => 'nom',
-                'placeholder' => 'choisir un campus'
+                'placeholder' => 'choisir un campus',
+                'required' => false
 
             ])
             ->add('recherche', TextType::class, [
@@ -36,12 +37,14 @@ class HomeType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
+                'empty_data' => ''
             ])
             ->add('dateFin', DateType::class, [
                 'label' => 'Et',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false,
+                'empty_data' => ''
             ])
             ->add('sortieOrganisees', CheckboxType::class, [
 

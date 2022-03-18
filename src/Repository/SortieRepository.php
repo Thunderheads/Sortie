@@ -11,6 +11,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\Expr\Join;
+use PHPUnit\Framework\Constraint\IsEmpty;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -79,6 +80,8 @@ class SortieRepository extends ServiceEntityRepository
             ->setParameter(':now', $date);
         return $queryBuilder->getQuery()->getResult();
     }
+
+
     /**
      * Fonction en charge de réaliser le filtre des sorties en fonction des plusieurs paramètres
      *
@@ -108,20 +111,25 @@ class SortieRepository extends ServiceEntityRepository
             //table campus = s.Campus c'est pour ça qu'on l'alias (c'est comme si on avait fait appelle a la table campus)
             ->innerJoin('s.Campus', 'c')
             ->innerJoin('s.etat', 'e')
-            ->leftJoin('s.Participant', 'p')
+            ->leftJoin('s.Participant', 'p');
             //recupere toutes les infos participants
             //->addSelect('p')
-
-            ->andWhere(' s.Campus = :campus')
-            ->setParameter(':campus', $campusChoisi)
-            //si on veut rajouter la table au select
-            //->select('c')
-            //regarder que la date de la table sortie soit compris entre date1 et date 2
+        if($campusChoisi !== null){
+            $queryBuilder
+                ->andWhere(' s.Campus = :campus')
+                ->setParameter(':campus', $campusChoisi);
+        }
+        if ($dateDebut !== null){
+            $queryBuilder
             ->andWhere('s.dateHeureDebut >= :dateDebut')
-            ->setParameter(':dateDebut', $dateDebut)
-            ->andWhere('s.dateHeureDebut <= :dateFin ')
-            ->setParameter(':dateFin', $dateFin);
+                ->setParameter(':dateDebut', $dateDebut);
+        }
 
+        if ($dateFin !== null){
+            $queryBuilder
+                ->andWhere('s.dateHeureDebut <= :dateFin ')
+                ->setParameter(':dateFin', $dateFin);
+        }
 
 
             //nom de la sortie doit contenir %recherche%
@@ -142,14 +150,14 @@ class SortieRepository extends ServiceEntityRepository
         //quand sorties auxquelles je suis inscrit/e et sorties auxquelles je ne suis pas inscrit/e sont cochées
 
             // sorties auxquelles je suis inscrit/e
-            if($hasRegister )
+        if($hasRegister )
             {
                 $queryBuilder->andWhere(':participant MEMBER OF s.Participant')
                     ->setParameter('participant', $id);
             }
 
             // sorties auxquelles je ne suis pas inscrit/e
-            if($isRegister)
+        if($isRegister)
             {
                 $queryBuilder->andWhere(':participant NOT MEMBER OF s.Participant')
                     ->setParameter(':participant', $id );

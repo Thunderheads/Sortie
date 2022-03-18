@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use App\Form\AnnulerModele;
 use App\Form\AnnulerModeleType;
 
+use App\Form\AnnulerType;
 use App\Form\SortieType;
 use App\Form\UpdateSortieType;
 use App\Repository\EtatRepository;
@@ -110,7 +111,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
             //empeche le user si il n'est pas l'organisateur
 
-            if($this->getUser()->getId() !== $sortie->getOrganisateur()->getId()){
+            if($this->getUser() !== $sortie->getOrganisateur()){
                 return $this->redirectToRoute('home');
             }
 
@@ -179,11 +180,15 @@ use Symfony\Component\Routing\Annotation\Route;
             $annulerModele = new AnnulerModele();
 
             //je crée mon form avc les parametres dans la classe annulerType
-            $annuleForm = $this->createForm(AnnulerModeleType::class , $annulerModele);
+            $annuleForm = $this->createForm(AnnulerType::class , $annulerModele);
             $annuleForm->handleRequest($requestA);
 
             //empeche le user si il n'est pas l'organisateur
             if($this->getUser()->getId() !== $sortie->getOrganisateur()->getId()){
+                return $this->redirectToRoute('home');
+            }
+
+            if($sortie->getEtat()->getLibelle() == 'Annulée'){
                 return $this->redirectToRoute('home');
             }
 

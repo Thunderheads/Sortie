@@ -12,6 +12,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
+use phpDocumentor\Reflection\Types\Array_;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
@@ -32,6 +33,20 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $ideeSortie =  array(
+            'Mais ou est xavier dupont de ligonnès',
+            'Visiter le musée d’Emile Louis',
+            'Aller au ski',
+            'Acheter un lamentin',
+            'Découverte de Damas',
+            'Découverte des caves de Maurepas',
+            'Viste de la MAGNIFIQUE Limoges',
+            'cuite au NPA (Pleumeleuc)',
+            'Bowling',
+            'tire à la carabine VR en Ukraine '
+
+            );
+
         $this->manager = $manager;
         $this->addEtat();
         $this->addVille();
@@ -116,6 +131,30 @@ class AppFixtures extends Fixture
      */
     public function addParticipant(){
 
+        $participant = new Participant();
+        $participant->setNom($this->faker->lastName);
+        $participant->setPrenom('Thunderhead');
+        $participant->setTelephone($this->faker->phoneNumber);
+        $participant->setEmail($this->faker->email);
+        $participant->setPassword($this->hasher->hashPassword($participant, '123'));
+        $participant->setActif(true);
+        $participant->setPseudo('eric56');
+        $campus = $this->manager->getRepository(Campus::class)->findAll();
+        $participant->setCampus($this->faker->randomElement($campus));
+        $this->manager->persist($participant);
+
+        $participant = new Participant();
+        $participant->setNom($this->faker->lastName);
+        $participant->setPrenom($this->faker->firstName);
+        $participant->setTelephone($this->faker->phoneNumber);
+        $participant->setEmail($this->faker->email);
+        $participant->setPassword($this->hasher->hashPassword($participant, '123'));
+        $participant->setActif(true);
+        $participant->setPseudo('erica57');
+        $campus = $this->manager->getRepository(Campus::class)->findAll();
+        $participant->setCampus($this->faker->randomElement($campus));
+
+        $this->manager->persist($participant);
         for ($i = 0; $i < 10; $i++) {
 
             $participant = new Participant();
@@ -140,13 +179,26 @@ class AppFixtures extends Fixture
      * @return void
      */
     public function addSortie(){
+        $ideeSortie =  array(
+            'Mais ou est xavier dupont de ligonnès',
+            'Visiter le musée d’Emile Louis',
+            'Aller au ski',
+            'Acheter un lamentin',
+            'Découverte de Damas',
+            'Découverte des caves de Maurepas',
+            'Viste de la MAGNIFIQUE Limoges',
+            'cuite au NPA (Pleumeleuc)',
+            'Bowling',
+            'tire à la carabine VR en Ukraine '
+
+        );
 
 
         for ($i = 0; $i < 10; $i++){
             $sortie = new Sortie();
-            $sortie->setNom($this->faker->name);
-            $sortie->setDateHeureDebut($this->faker->dateTime);
-            $sortie->setDateLimiteInscription($this->faker->dateTime);
+            $sortie->setNom($this->faker->randomElement($ideeSortie));
+            $sortie->setDateHeureDebut($this->faker->dateTimeBetween('2021-08-01', '2025-01-05'));
+            $sortie->setDateLimiteInscription(new \DateTime('2023-06-05 15:13:52'));
             $sortie->setDuree($this->faker->numberBetween(60,3600));
             $sortie->setNbInscriptionMax($this->faker->numberBetween(10,100));
             $sortie->setInfosSortie($this->faker->text);

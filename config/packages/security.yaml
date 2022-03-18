@@ -43,9 +43,10 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/trip, roles: ROLE_USER }
-        - { path: ^/home, roles: ROLE_USER }
-        - { path: ^/profil, roles: ROLE_USER }
+        # Si l'utilisateur n'est pas connecté, il sera automatiquement envoyé vers la page login
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # pour acceder à toutes les routes la personne doit avoir le statut user
+        - { path: ^/, roles: ROLE_USER }
 
 
 when@test:

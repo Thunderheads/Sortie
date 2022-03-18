@@ -151,53 +151,47 @@
                             <td>{{ c.dateLimiteInscription|date('d/m/Y') }}</td>
                             <td>{{ c.participant|length }} / {{ c.nbInscriptionMax }}</td>
                             <td>{{ c.etat.libelle }}</td>
-                            {% set isSubscribe = false %}
+                            {%  set isSubscribe = false %}
                             <!-- boucle for sur les sorties auquelles le participant est inscrit -->
-                            {% for sortie in user.sorties %}
+                            {% for sortie in user.sorties  %}
 
-                                {% if sortie.id == c.id %}
-                                    {% set isSubscribe = true %}
-                                    <td> X</td>
-                                {% endif %}
+                                {% if sortie.id == c.id  %}
+                                    {%  set isSubscribe = true %}
+                                    <td> X </td>
+                                {%  endif %}
 
                             {% endfor %}
-                            {% if not isSubscribe %}
+                            {% if not isSubscribe  %}
 
-                                <td></td>
-                            {% endif %}
+                                <td>  </td>
+                            {%  endif %}
 
                             <td><a href="{{ path('afficherProfil', {'id': c.organisateur.id}) }}">{{ c.organisateur.pseudo }}</a></td>
 
                             <!-- si je suis propriétaire -->
-                            {% if c.organisateur.id == user.id %}
+                            {%  if c.organisateur.id == user.id %}
                                 <!-- si la sortie est créee-->
                                 {% if c.etat.libelle == "Créée" %}
 
                                     <!-- si la date d'inscription est pas passée-->
                                     {% if ('now'|date('Y-m-d'))<= (c.dateLimiteInscription|date('Y-m-d')) %}
-                                        <td><a href="{{ path('publier', { 'id': c.id}) }}">Publier</a> - <a
-                                                    href="{{ path('sortiemodifierUneSortie', { 'id': c.id}) }}">Modifier</a>
-                                        </td>
+                                        <td>  <a href="{{ path('publier', { 'id': c.id}) }}">Publier</a> - <a href="{{ path('sortiemodifierUneSortie', { 'id': c.id}) }}">Modifier</a> </td>
                                     {% else %}
-                                        <td> Publier - Modifier</td>
-                                    {% endif %}
+                                        <td> Publier - Modifier </td>
+                                    {%  endif %}
 
                                 {% else %}
                                     <!-- si la date d'inscription est pas passée-->
-                                    {% if ('now'|date('Y-m-d'))<= (c.dateLimiteInscription|date('Y-m-d')) %}
-                                        <td><a href="{{ path('sortieafficherUneSortie', { 'id': c.id}) }}">Afficher</a>
-                                            - <a href="{{ path('sortieannulerLaSortie', { 'id': c.id}) }}">Annuler</a>
-                                        </td>
+                                    {% if ('now'|date('Y-m-d'))<= (c.dateLimiteInscription|date('Y-m-d')) and (c.etat.libelle != 'Annulée') %}
+                                        <td> <a href="{{ path('sortieafficherUneSortie', { 'id': c.id}) }}">Afficher</a> - <a href="{{ path('sortieannulerLaSortie', { 'id': c.id}) }}">Annuler</a></td>
                                     {% else %}
-                                        <td><a href="{{ path('sortieafficherUneSortie', { 'id': c.id}) }}">Afficher</a>
-                                            - Annuler
-                                        </td>
-                                    {% endif %}
-                                {% endif %}
+                                        <td> <a href="{{ path('sortieafficherUneSortie', { 'id': c.id}) }}">Afficher</a>  - Annuler</td>
+                                    {%  endif %}
+                                {%  endif %}
                             {% else %}
 
 
-                                <!-- si le nombre d'inscrit et la date sont cohérentes -->
+                                <!-- si le nombre d'inscrit et la date sont cohérentes  et si le participant est inscrit -->
                                 {% if (c.participant|length < c.nbInscriptionMax) and (('now'|date('Y-m-d'))<= (c.dateLimiteInscription|date('Y-m-d'))) and not isSubscribe %}
                                     <td><a href="{{ path('sortieafficherUneSortie', { 'id': c.id}) }}">Afficher</a> - <a
                                                 href=" {{ path('inscrire', { 'id': c.id}) }}">S'inscrire</a></td>
